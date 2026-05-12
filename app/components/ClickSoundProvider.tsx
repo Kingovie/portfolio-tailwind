@@ -1,0 +1,8 @@
+'use client';
+
+import { useClickSound } from '../hooks/useClickSound';
+
+export function ClickSoundProvider({ children }: { children: React.ReactNode }) {
+  useClickSound();
+  return <>{children}</>;
+}

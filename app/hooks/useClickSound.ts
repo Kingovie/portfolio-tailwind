@@ -1,0 +1,69 @@
+'use client';
+
+import { useEffect, useRef, useCallback } from 'react';
+
+function playClickSound(ctx: AudioContext) {
+  if (ctx.state === 'suspended') ctx.resume();
+
+  const when = ctx.currentTime + 0.01;
+  const duration = 0.008;
+  const buffer = ctx.createBuffer(1, ctx.sampleRate * duration, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < data.length; i++) {
+    data[i] = (Math.random() * 2 - 1) * Math.exp(-i / 40);
+  }
+
+  const source = ctx.createBufferSource();
+  source.buffer = buffer;
+
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 3200;
+  filter.Q.value = 3;
+
+  const gain = ctx.createGain();
+  gain.gain.value = 0.3;
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+
+  source.onended = () => source.disconnect();
+  source.start(when);
+
+  if (navigator.vibrate) navigator.vibrate(8);
+}
+
+export function useClickSound() {
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  const initAudio = useCallback(() => {
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext();
+    }
+    const ctx = audioCtxRef.current;
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+  }, []);
+
+  useEffect(() => {
+    function handleClick() {
+      initAudio();
+      if (localStorage.getItem('sound-muted') !== 'true') {
+        if (!audioCtxRef.current) {
+          audioCtxRef.current = new AudioContext();
+        }
+        playClickSound(audioCtxRef.current);
+      }
+    }
+
+    document.addEventListener('click', handleClick, true);
+    return () => {
+      document.removeEventListener('click', handleClick, true);
+    };
+  }, [initAudio]);
+
+  return { initAudio };
+}
