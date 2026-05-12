@@ -6,13 +6,20 @@ import { Moon, Sun, SpeakerHigh, SpeakerSlash, Envelope, TwitterLogo, LinkedinLo
 import { Tooltip } from "./components/Tooltip";
 import { cn } from "@/lib/utils";
 
+const placeholderColors = [
+  'bg-[#f0f4ff]', // soft blue
+  'bg-[#fff4f0]', // soft peach
+  'bg-[#f0fff4]', // soft mint
+  'bg-[#fff0f8]', // soft pink
+];
+
 const portfolioData = {
-  name: "Your Name",
+  name: "Michael Ovie",
   role: "Product Designer",
-  bio: "Designing interfaces and interactions that feel simple, clear, and enjoyable. Currently building at [Company]. Previously at [Company].",
+  bio: "Product Designer with 3 years of hands-on experience designing for fintech, e-commerce, and proptech companies. My work has reached 17,000+ users globally and helped accelerate product sales by 40%. I focus on user research and usability testing to inform my design decisions. I enjoy solving complex problems by breaking them down into simple, intuitive experiences that people actually want to use.",
   currentRole: {
-    company: "Company Name",
-    url: "https://example.com",
+    company: "Bringgoods Engineering",
+    url: "#",
   },
   featured: [
     { name: "Project One", description: "Flagship product redesign that improved user retention by 40%", url: "#" },
@@ -129,11 +136,11 @@ export default function Portfolio() {
             </div>
           </div>
           {/* Online indicator */}
-          <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
+          <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-background" style={{ background: 'radial-gradient(circle at 30% 30%, #4ade80, #18a855)', boxShadow: 'inset 0 0 8px rgba(255,255,255,0.3)' }}></div>
         </div>
 
         {/* Name with verified badge and icons */}
-        <div className="flex justify-between items-center mb-[2px]">
+        <div className="flex justify-between items-center mb-0">
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-semibold text-foreground">{portfolioData.name}</h1>
             <SealCheck size={20} weight="fill" className="text-[#1EB8F9]" />
@@ -142,7 +149,7 @@ export default function Portfolio() {
             <div className="flex items-center gap-1">
               <a
                 href="/work"
-                className="p-2 hover:bg-secondary rounded-md transition-colors duration-150"
+                className="p-2 hover:bg-secondary rounded-lg transition-colors duration-150"
                 aria-label="View work"
               >
                 <SquaresFour size={18} weight="bold" />
@@ -150,7 +157,7 @@ export default function Portfolio() {
               <Tooltip content={soundMuted ? "Unmute sound" : "Mute sound"}>
                 <button
                   onClick={toggleSound}
-                  className="p-2 hover:bg-secondary rounded-md transition-colors duration-150"
+                  className="p-2 hover:bg-secondary rounded-lg transition-colors duration-150"
                   aria-label={soundMuted ? "Unmute sound" : "Mute sound"}
                 >
                   {soundMuted ? <SpeakerSlash size={18} weight="bold" /> : <SpeakerHigh size={18} weight="bold" />}
@@ -159,7 +166,7 @@ export default function Portfolio() {
               <Tooltip content={darkMode ? "Light mode" : "Dark mode"}>
                 <button
                   onClick={() => setDarkMode(!darkMode)}
-                  className="p-2 hover:bg-secondary rounded-md transition-colors duration-150"
+                  className="p-2 hover:bg-secondary rounded-lg transition-colors duration-150"
                   aria-label="Toggle dark mode"
                 >
                   {darkMode ? <Sun size={18} weight="bold" /> : <Moon size={18} weight="bold" />}
@@ -170,19 +177,22 @@ export default function Portfolio() {
         </div>
 
         {/* Role */}
-        <p className="text-muted-foreground mb-6">Product Designer</p>
+        <p className="text-muted-foreground mb-4">Product Designer</p>
 
         {/* Bio */}
-        <p className="text-foreground max-w-md leading-relaxed mb-4">{portfolioData.bio}</p>
+        <p className="text-foreground max-w-xl leading-relaxed mb-3">Product Designer with over 3 years of experience in fintech, e-commerce, and proptech. My designs have reached 17,000+ users and boosted product sales by 40%. I combine user research with usability testing to create simple, intuitive experiences that drive results.</p>
 
         {/* Now section */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-2 mt-4 mb-8">
           <span className="text-xs uppercase tracking-wider text-muted-foreground">Now</span>
           <a 
             href={portfolioData.currentRole.url} 
-            className="text-foreground hover:underline decoration-muted-foreground/50 underline-offset-4 transition-all duration-150"
+            className="text-foreground group inline-flex items-center hover:underline decoration-muted-foreground/50 underline-offset-4 transition-all duration-150"
           >
-            {portfolioData.currentRole.company}
+            <span className="group-hover:mr-1 transition-all duration-150">{portfolioData.currentRole.company}</span>
+            <div className="w-6 h-6 rounded-lg bg-secondary flex items-center justify-center overflow-hidden group-hover:rotate-[16deg] group-hover:origin-left transition-transform duration-300 ease-out ml-2">
+              {/* Add company logo here - replace with <Image src="/logo.png" alt="Logo" className="object-cover" /> */}
+            </div>
           </a>
         </div>
 
@@ -196,7 +206,7 @@ export default function Portfolio() {
             <Link
               key={index}
               href={project.url}
-              className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-md -mx-3 px-3 hover:bg-secondary/50"
+              className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
             >
               <span className="font-medium group-hover:text-primary transition-colors duration-150">{project.name}</span>
               <div className="flex items-center gap-2">
@@ -221,7 +231,13 @@ export default function Portfolio() {
               href={project.slug ? `/work/${project.slug}` : '#'}
               className="group block hover-lift transition-transform duration-200"
             >
-              <div className="aspect-video bg-secondary rounded-md mb-4 group-hover:bg-muted transition-colors duration-200" />
+              <div className={`relative aspect-video rounded-lg mb-4 overflow-hidden group-hover:brightness-95 transition-all duration-200 ${placeholderColors[index % placeholderColors.length]}`}>
+                <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <span className="px-2 py-1 text-xs bg-foreground text-background rounded-lg">
+                    View work
+                  </span>
+                </span>
+              </div>
               <span className="text-xs uppercase tracking-wider text-muted-foreground block mb-1">
                 {project.category}
               </span>
@@ -240,7 +256,7 @@ export default function Portfolio() {
               <a
                 key={index}
                 href={article.url}
-                className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-md -mx-3 px-3 hover:bg-secondary/50"
+                className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
               >
               <span className="font-medium group-hover:text-primary transition-colors duration-150">{article.title}</span>
               <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150">{article.date}</span>
