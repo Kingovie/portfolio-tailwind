@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from 'next/image';
 import Link from 'next/link';
 import { Moon, Sun, SpeakerHigh, SpeakerSlash, Envelope, TwitterLogo, LinkedinLogo, DribbbleLogo, ArrowRight, CaretRight, SquaresFour, SealCheck } from "@phosphor-icons/react";
 import { Tooltip } from "./components/Tooltip";
@@ -127,13 +128,8 @@ export default function Portfolio() {
       <header className="mb-16">
         {/* Profile Image */}
         <div className="relative w-[62px] h-[62px] mb-5">
-          <div className="w-full h-full rounded-2xl overflow-hidden bg-secondary">
-            {/* Replace with your profile image - uncomment below and add src */}
-            {/* <Image src="/your-photo.jpg" alt="Profile" fill className="object-cover" /> */}
-            <div className="w-full h-full flex items-center justify-center text-muted-foreground text-2xl">
-              {/* Initials or placeholder */}
-              {/* <Image src="/your-photo.jpg" alt="Profile" width={80} height={80} className="object-cover" /> */}
-            </div>
+          <div className="w-full h-full rounded-2xl overflow-hidden">
+            <Image src="/profile.png" alt="Profile" fill className="object-cover" />
           </div>
           {/* Online indicator */}
           <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-background" style={{ background: 'radial-gradient(circle at 30% 30%, #4ade80, #18a855)', boxShadow: 'inset 0 0 8px rgba(255,255,255,0.3)' }}></div>
