@@ -180,14 +180,14 @@ export default function Portfolio() {
 
         {/* Now section */}
         <div className="flex items-center gap-2 mt-4 mb-8">
-          <span className="text-xs uppercase tracking-wider text-muted-foreground">Now</span>
+          <span className="text-xs uppercase tracking-wider text-muted-foreground">previously at</span>
           <a 
             href={portfolioData.currentRole.url} 
             className="text-foreground group inline-flex items-center hover:underline decoration-muted-foreground/50 underline-offset-4 transition-all duration-150"
           >
             <span className="group-hover:mr-1 transition-all duration-150">{portfolioData.currentRole.company}</span>
-            <div className="w-6 h-6 rounded-lg bg-secondary flex items-center justify-center overflow-hidden group-hover:rotate-[16deg] group-hover:origin-left transition-transform duration-300 ease-out ml-2">
-              {/* Add company logo here - replace with <Image src="/logo.png" alt="Logo" className="object-cover" /> */}
+            <div className="relative w-5 h-5 rounded-lg bg-secondary flex items-center justify-center overflow-hidden group-hover:rotate-[16deg] group-hover:origin-left transition-transform duration-300 ease-out ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <Image src="/company-logo.jpg" alt="Company Logo" width={20} height={20} className="object-contain" />
             </div>
           </a>
         </div>
