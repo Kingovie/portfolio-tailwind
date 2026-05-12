@@ -1,6 +1,6 @@
 # Portfolio - Product Designer
 
-A product designer portfolio built with Next.js 15, Tailwind CSS, and Framer Motion, following Charles Shin's design system.
+A product designer portfolio built with Next.js 15, Tailwind CSS, and Phosphor Icons.
 
 ## Features
 
@@ -26,7 +26,6 @@ A product designer portfolio built with Next.js 15, Tailwind CSS, and Framer Mot
 - Next.js 15
 - TypeScript
 - Tailwind CSS
-- Framer Motion
 - Phosphor Icons
 
 ## Getting Started
@@ -38,16 +37,6 @@ npm run dev
 
 Open http://localhost:3000 to view the portfolio.
 
-## Design System
-
-This portfolio follows the design guidelines from Charles Shin's design system:
-
-- **Typography**: SF Pro Rounded (system font stack)
-- **Color**: Light-first with neutral base + accent
-- **Spacing**: 4px increments, balanced density
-- **Border Radius**: rounded-md for buttons, rounded-lg for cards
-- **Layout**: max-w-3xl content width, left-aligned
-
 ## Customization
 
 Edit `app/page.tsx` to update:
@@ -57,16 +46,12 @@ Edit `app/page.tsx` to update:
 - All projects with case studies
 - Social links
 
-## Files Added/Modified
+## Files
 
 - `app/page.tsx` - Main portfolio page with profile, icons, and all sections
 - `app/components/Tooltip.tsx` - Custom tooltip component
 - `app/components/ClickSoundProvider.tsx` - Click sound provider
-- `app/components/SoundToggle.tsx` - Sound toggle component (unused, integrated in page)
+- `app/components/SoundToggle.tsx` - Sound toggle component
 - `app/hooks/useClickSound.ts` - Click sound hook using Web Audio API
 - `app/layout.tsx` - Root layout with ClickSoundProvider
 - `lib/utils.ts` - Utility functions (cn helper)
-
-## References
-
-- Charles Shin's design system: https://github.com/0xchsh/portfolio
