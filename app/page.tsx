@@ -127,12 +127,12 @@ export default function Portfolio() {
       {/* Header */}
       <header className="mb-16">
         {/* Profile Image */}
-        <div className="relative w-[62px] h-[62px] mb-5">
-          <div className="w-full h-full rounded-2xl overflow-hidden">
+        <div className="relative w-[62px] h-[62px] mb-5 group cursor-pointer">
+          <div className="relative w-full h-full rounded-2xl overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:brightness-105 group-hover:shadow-lg">
             <Image src="/profile.png" alt="Profile" fill className="object-cover" />
           </div>
           {/* Online indicator */}
-          <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-background" style={{ background: 'radial-gradient(circle at 30% 30%, #4ade80, #18a855)', boxShadow: 'inset 0 0 8px rgba(255,255,255,0.3)' }}></div>
+          <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-background" style={{ background: 'radial-gradient(circle at 30% 30%, #4ade80, #18a855)', boxShadow: 'inset 0 0 8px rgba(255,255,255,0.3)' }}></div>
         </div>
 
         {/* Name with verified badge and icons */}
