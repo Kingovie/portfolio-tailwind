@@ -8,14 +8,14 @@ const projects = [
     slug: 'treepz',
     title: 'Treepz Super App',
     description: 'Unifying fragmented mobility solutions across four African markets, driving 42% user growth and 89% wallet engagement.',
-    date: '13 Mar 2025',
+    date: '2025',
     tags: ['case study', 'product design', 'mobile app'],
   },
   {
     slug: 'fintech-dashboard',
     title: 'Fintech Dashboard',
     description: 'A comprehensive SaaS platform for financial analytics with real-time data visualization and reporting tools.',
-    date: '15 Feb 2025',
+    date: '2025',
     tags: ['case study', 'product design', 'web app'],
   },
 ];
@@ -24,15 +24,13 @@ export default function WorkPage() {
   return (
     <div className="min-h-screen">
       <div className="max-w-2xl mx-auto px-6 pt-20 pb-20">
-        {/* Header */}
         <header className="mb-16">
           <h1 className="text-2xl font-semibold mb-2">Work</h1>
           <p className="text-muted-foreground">
-            A collection of case studies and projects I've worked on
+            A collection of case studies and projects I&apos;ve worked on
           </p>
         </header>
 
-        {/* Projects List */}
         <div className="space-y-8">
           {projects.map((project) => (
             <Link
@@ -60,7 +58,7 @@ export default function WorkPage() {
                     {project.tags.map((tag, index) => (
                       <span 
                         key={index}
-                        className="text-xs px-2 py-1 bg-secondary text-muted-foreground rounded"
+                        className="text-xs px-2 py-1 bg-secondary text-muted-foreground rounded-lg"
                       >
                         {tag}
                       </span>
@@ -77,7 +75,6 @@ export default function WorkPage() {
           ))}
         </div>
 
-        {/* Back link */}
         <div className="mt-12">
           <Link 
             href="/" 
