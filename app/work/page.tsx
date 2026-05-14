@@ -5,9 +5,9 @@ import { ArrowRight, Calendar } from '@phosphor-icons/react';
 
 const projects = [
   {
-    slug: 'treepz',
-    title: 'Treepz Super App',
-    description: 'Unifying fragmented mobility solutions across four African markets, driving 42% user growth and 89% wallet engagement.',
+    slug: 'bringgoods',
+    title: 'BringGoods: Ultra-Fast Fresh Food Delivery',
+    description: 'A three-sided marketplace connecting buyers, sellers, and riders in Lagos with price negotiation and sub-30-minute delivery.',
     date: '2025',
     tags: ['case study', 'product design', 'mobile app'],
   },

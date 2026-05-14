@@ -27,7 +27,7 @@ const portfolioData = {
     { name: "Project Two", description: "Design system used by 50+ engineers and designers", url: "#" }
   ],
   projects: [
-    { name: "Treepz Super App", category: "Mobile App", description: "Super app unifying 4 mobility services", slug: "treepz" },
+    { name: "BringGoods", category: "Mobile App", description: "Ultra-fast fresh food delivery with price negotiation", slug: "bringgoods" },
     { name: "Fintech Dashboard", category: "Web App", description: "SaaS platform for financial analytics", slug: "fintech-dashboard" },
     { name: "Health Tracker", category: "Mobile App", description: "iOS/Android fitness tracking application", slug: null },
     { name: "Design System", category: "Systems", description: "Component library with 100+ components", slug: null }
