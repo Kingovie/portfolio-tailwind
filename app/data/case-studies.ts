@@ -1,9 +1,9 @@
 const caseStudies = [
   {
-    title: "Treepz Super App",
-    description: "Unifying fragmented mobility solutions across four African markets, driving 42% user growth and 89% wallet engagement.",
-    date: "2025",
-    tags: ["fintech", "mobile app", "product design"],
+    title: "BringGoods",
+    description: "Ultra-fresh food delivery platform with a unique negotiation-based marketplace across Lagos, Nigeria.",
+    date: "2024-2025",
+    tags: ["product design", "mobile app", "ux research"],
     color: "bg-[#f0f4ff]"
   },
   {
