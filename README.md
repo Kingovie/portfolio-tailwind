@@ -19,7 +19,8 @@ A product designer portfolio built with Next.js 15, Tailwind CSS, and Phosphor I
 - All icons in header with rounded-lg hover states
 
 ### Project Cards
-- Horizontal card layout (image left, content right) inspired by dominiksobe.com
+- Horizontal card layout (image left, content right) with vertical list view
+- Grid view toggle (list/grid icons) on the Projects header
 - Colored placeholder frames for project thumbnails
 - Project name, 3-line description, "View case study →" link
 - "Coming soon" label for projects without case studies

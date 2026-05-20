@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
-import { Moon, Sun, SpeakerHigh, SpeakerSlash, Envelope, TwitterLogo, LinkedinLogo, DribbbleLogo, ArrowRight, CaretRight, SquaresFour, SealCheck } from "@phosphor-icons/react";
+import { Moon, Sun, SpeakerHigh, SpeakerSlash, Envelope, TwitterLogo, LinkedinLogo, DribbbleLogo, ArrowRight, CaretRight, SquaresFour, Rows, SealCheck } from "@phosphor-icons/react";
 import { Tooltip } from "./components/Tooltip";
 import { cn } from "@/lib/utils";
 
@@ -98,6 +98,7 @@ export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(false);
   const [soundMuted, setSoundMuted] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
 
   useEffect(() => {
     if (darkMode) {
@@ -229,42 +230,84 @@ export default function Portfolio() {
 
       {/* Projects */}
       <section className="mb-16">
-        <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Projects</h2>
-        <div className="flex flex-col gap-6">
-          {portfolioData.projects.map((project, index) => (
-            <Link
-              key={index}
-              href={project.slug ? `/work/${project.slug}` : '#'}
-              className="group relative w-full transition-all duration-300 hover:scale-[1.01] block rounded-xl shadow-sm overflow-hidden"
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xs uppercase tracking-wider text-muted-foreground">Projects</h2>
+          <div className="flex items-center gap-1 bg-secondary rounded-lg p-0.5">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`p-1.5 rounded-md transition-colors ${viewMode === 'list' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
             >
-              <div className="flex flex-col md:grid md:grid-cols-2 gap-0 md:min-h-[180px]">
-                <div className={`relative w-full h-[170px] md:h-full ${placeholderColors[index % placeholderColors.length]}`} />
-                <div className="flex flex-col justify-between p-4 bg-card">
-                  <div>
-                    <h3 className="text-base font-semibold mb-2 group-hover:text-primary transition-colors">
-                      {project.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                      {project.description}
-                    </p>
-                    {project.slug ? (
-                      <span className="text-xs font-medium text-foreground/70 group-hover:text-foreground transition-colors">
-                        View case study →
-                      </span>
-                    ) : (
-                      <span className="text-xs text-muted-foreground/50">
-                        Coming soon
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex justify-end mt-2">
-                    <span className="text-xs text-muted-foreground/50">{project.category}</span>
+              <Rows size={16} weight="bold" />
+            </button>
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              <SquaresFour size={16} weight="bold" />
+            </button>
+          </div>
+        </div>
+
+        {viewMode === 'list' ? (
+          <div className="flex flex-col gap-6">
+            {portfolioData.projects.map((project, index) => (
+              <Link
+                key={index}
+                href={project.slug ? `/work/${project.slug}` : '#'}
+                className="group relative w-full transition-all duration-300 hover:scale-[1.01] block rounded-xl shadow-sm overflow-hidden"
+              >
+                <div className="flex flex-col md:grid md:grid-cols-2 gap-0 md:min-h-[180px]">
+                  <div className={`relative w-full h-[170px] md:h-full ${placeholderColors[index % placeholderColors.length]}`} />
+                  <div className="flex flex-col justify-between p-4 bg-card">
+                    <div>
+                      <h3 className="text-base font-semibold mb-2 group-hover:text-primary transition-colors">
+                        {project.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+                        {project.description}
+                      </p>
+                      {project.slug ? (
+                        <span className="text-xs font-medium text-foreground/70 group-hover:text-foreground transition-colors">
+                          View case study →
+                        </span>
+                      ) : (
+                        <span className="text-xs text-muted-foreground/50">
+                          Coming soon
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex justify-end mt-2">
+                      <span className="text-xs text-muted-foreground/50">{project.category}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-6">
+            {portfolioData.projects.map((project, index) => (
+              <Link
+                key={index}
+                href={project.slug ? `/work/${project.slug}` : '#'}
+                className="group block transition-transform duration-200"
+              >
+                <div className={`relative aspect-video rounded-lg mb-4 overflow-hidden transition-all duration-200 ${placeholderColors[index % placeholderColors.length]}`}>
+                  <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <span className="px-2 py-1 text-xs bg-foreground text-background rounded-lg">
+                      View work
+                    </span>
+                  </span>
+                </div>
+                <span className="text-xs uppercase tracking-wider text-muted-foreground block mb-1">
+                  {project.category}
+                </span>
+                <span className="font-medium block mb-1 group-hover:text-primary transition-colors duration-150">{project.name}</span>
+                <span className="text-muted-foreground text-sm">{project.description.length > 80 ? project.description.slice(0, 80) + '...' : project.description}</span>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Writing */}
