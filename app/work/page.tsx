@@ -12,11 +12,11 @@ const projects = [
     tags: ['case study', 'product design', 'mobile app'],
   },
   {
-    slug: 'fintech-dashboard',
-    title: 'Fintech Dashboard',
-    description: 'A comprehensive SaaS platform for financial analytics with real-time data visualization and reporting tools.',
+    slug: 'cribstock',
+    title: 'Cribstock: Making Property Investment Accessible',
+    description: 'Revamped a real estate investment platform with a live presale tracker, redesigned dashboard, and purchase flow — driving 80% faster sell-outs.',
     date: '2025',
-    tags: ['case study', 'product design', 'web app'],
+    tags: ['case study', 'product design', 'fintech', 'revamp'],
   },
 ];
 

@@ -27,10 +27,10 @@ const portfolioData = {
     { name: "Project Two", description: "Design system used by 50+ engineers and designers", url: "#" }
   ],
   projects: [
-    { name: "BringGoods", category: "Mobile App", description: "Ultra-fast fresh food delivery with price negotiation", slug: "bringgoods" },
-    { name: "Fintech Dashboard", category: "Web App", description: "SaaS platform for financial analytics", slug: "fintech-dashboard" },
-    { name: "Health Tracker", category: "Mobile App", description: "iOS/Android fitness tracking application", slug: null },
-    { name: "Design System", category: "Systems", description: "Component library with 100+ components", slug: null }
+    { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods" },
+    { name: "Cribstock", category: "Web App", description: "Real estate investment platform enabling everyday Nigerians to co-own properties and earn rental income from their phones.", slug: "cribstock" },
+    { name: "Health Tracker", category: "Mobile App", description: "A fitness tracking app that helps users monitor workouts, track progress, set goals, and analyze health metrics.", slug: null },
+    { name: "Design System", category: "Systems", description: "A scalable design system with 100+ reusable components ensuring consistency across products.", slug: null }
   ],
   writing: [
     { title: "How I approach design systems", date: "Jan 2026", url: "#" },
@@ -192,6 +192,16 @@ export default function Portfolio() {
           </a>
         </div>
 
+        <div className="mb-12">
+          <a
+            href="mailto:michaelovie33@gmail.com?subject=Hey Michael"
+            className="h-12 bg-primary text-primary-foreground px-8 rounded-full text-sm font-medium inline-flex items-center gap-2 cursor-pointer hover:opacity-90 active:scale-95 transition-all"
+          >
+            <Envelope size={18} weight="bold" />
+            <span>Get in touch</span>
+          </a>
+        </div>
+
         </header>
 
       {/* Featured */}
@@ -220,25 +230,38 @@ export default function Portfolio() {
       {/* Projects */}
       <section className="mb-16">
         <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Projects</h2>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="flex flex-col gap-6">
           {portfolioData.projects.map((project, index) => (
             <Link
               key={index}
               href={project.slug ? `/work/${project.slug}` : '#'}
-              className="group block hover-lift transition-transform duration-200"
+              className="group relative w-full transition-all duration-300 hover:scale-[1.01] block rounded-xl shadow-sm overflow-hidden"
             >
-              <div className={`relative aspect-video rounded-lg mb-4 overflow-hidden group-hover:brightness-95 transition-all duration-200 ${placeholderColors[index % placeholderColors.length]}`}>
-                <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <span className="px-2 py-1 text-xs bg-foreground text-background rounded-lg">
-                    View work
-                  </span>
-                </span>
+              <div className="flex flex-col md:grid md:grid-cols-2 gap-0 md:min-h-[180px]">
+                <div className={`relative w-full h-[170px] md:h-full ${placeholderColors[index % placeholderColors.length]}`} />
+                <div className="flex flex-col justify-between p-4 bg-card">
+                  <div>
+                    <h3 className="text-base font-semibold mb-2 group-hover:text-primary transition-colors">
+                      {project.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+                      {project.description}
+                    </p>
+                    {project.slug ? (
+                      <span className="text-xs font-medium text-foreground/70 group-hover:text-foreground transition-colors">
+                        View case study →
+                      </span>
+                    ) : (
+                      <span className="text-xs text-muted-foreground/50">
+                        Coming soon
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex justify-end mt-2">
+                    <span className="text-xs text-muted-foreground/50">{project.category}</span>
+                  </div>
+                </div>
               </div>
-              <span className="text-xs uppercase tracking-wider text-muted-foreground block mb-1">
-                {project.category}
-              </span>
-              <span className="font-medium block mb-1 group-hover:text-primary transition-colors duration-150">{project.name}</span>
-              <span className="text-muted-foreground text-sm">{project.description}</span>
             </Link>
           ))}
         </div>

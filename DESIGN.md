@@ -140,21 +140,28 @@ button:active:not(:disabled) {
 
 ```
 app/
-  page.tsx          # Home page with profile, featured, projects, writing, contact
-  layout.tsx        # Root layout with ClickSoundProvider
-  globals.css       # Tailwind + CSS variables + custom styles
+  page.tsx                          # Home page
+  layout.tsx                        # Root layout
+  globals.css                       # Tailwind + CSS custom properties
   work/
-    page.tsx        # Work listing page
+    page.tsx                        # Work listing
     [slug]/
-      page.tsx      # Case study detail page
+      page.tsx                      # Routes bringgoods/cribstock → dedicated components
+      BringGoodsCaseStudy.tsx       # Rich case study with sidebar TOC
+      CribstockCaseStudy.tsx        # Cribstock case study with sidebar TOC
+      CaseStudyClient.tsx           # Generic markdown-like renderer
   components/
     Tooltip.tsx
     ClickSoundProvider.tsx
+    ClickSpark.tsx
     SoundToggle.tsx
   data/
     projects.ts
+    case-studies.ts                 # Case study metadata
   hooks/
     useClickSound.ts
 lib/
-  utils.ts          # cn() utility function
+  utils.ts                          # cn() utility function
+public/
+  bringgoods-original.html          # Original HTML case study (reference)
 ```

@@ -166,7 +166,7 @@ export function BringGoodsCaseStudy() {
                 <span className="px-3 py-1 bg-secondary text-muted-foreground text-sm rounded-full">ux research</span>
                 <span className="px-3 py-1 bg-secondary text-muted-foreground text-sm rounded-full">mobile app</span>
                 <span className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-800 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
-                  In Development
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />In Development
                 </span>
               </div>
 

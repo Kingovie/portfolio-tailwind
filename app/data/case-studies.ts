@@ -7,11 +7,11 @@ const caseStudies = [
     color: "bg-[#f0f4ff]"
   },
   {
-    title: "Fintech Dashboard",
-    description: "A comprehensive SaaS platform for financial analytics with real-time data visualization.",
+    title: "Cribstock",
+    description: "Revamped a real estate investment platform with live presale tracking, redesigned dashboard, and optimized purchase flow.",
     date: "2025",
-    tags: ["fintech", "web app", "dashboard"],
-    color: "bg-[#fff4f0]"
+    tags: ["fintech", "proptech", "revamp"],
+    color: "bg-[#f0fff4]"
   }
 ];
 

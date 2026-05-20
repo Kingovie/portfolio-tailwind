@@ -16,6 +16,7 @@ export function SoundToggle() {
     const newMuted = !isMuted;
     setIsMuted(newMuted);
     localStorage.setItem('sound-muted', String(newMuted));
+    window.dispatchEvent(new Event('sound-muted-change'));
   };
 
   return (
