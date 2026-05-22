@@ -156,7 +156,7 @@ export function CribstockCaseStudy() {
 
               <div className="flex items-center gap-1.5 text-muted-foreground text-sm mb-3">
                 <Calendar size={14} weight="bold" />
-                2025
+                2023-2024
               </div>
 
               <h1 className="text-3xl font-semibold mb-4">
@@ -370,7 +370,7 @@ export function CribstockCaseStudy() {
             {/* Footer */}
             <footer className="py-6 border-t border-border mt-8">
               <p className="text-xs text-muted-foreground text-center">
-                Case study: Cribstock, Lagos, Nigeria, 2025
+                Case study: Cribstock, Lagos, Nigeria, 2023-2024
               </p>
             </footer>
           </div>

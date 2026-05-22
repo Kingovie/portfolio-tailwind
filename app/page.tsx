@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Moon, Sun, SpeakerHigh, SpeakerSlash, Envelope, TwitterLogo, LinkedinLogo, DribbbleLogo, ArrowRight, CaretRight, SquaresFour, Rows, SealCheck } from "@phosphor-icons/react";
 import { Tooltip } from "./components/Tooltip";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const placeholderColors = [
@@ -27,8 +28,8 @@ const portfolioData = {
     { name: "Project Two", description: "Design system used by 50+ engineers and designers", url: "#" }
   ],
   projects: [
-    { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/bringgoods-card.png" },
-    { name: "Cribstock", category: "Web App", description: "Real estate investment platform enabling everyday Nigerians to co-own properties and earn rental income from their phones.", slug: "cribstock" },
+    { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/Scene-1.png" },
+    { name: "Cribstock", category: "Web App", description: "Real estate investment platform enabling everyday Nigerians to co-own properties and earn rental income from their phones.", slug: "cribstock", image: "/projects/cribstock-card.png" },
     { name: "Health Tracker", category: "Mobile App", description: "A fitness tracking app that helps users monitor workouts, track progress, set goals, and analyze health metrics.", slug: null },
     { name: "Design System", category: "Systems", description: "A scalable design system with 100+ reusable components ensuring consistency across products.", slug: null }
   ],
@@ -210,20 +211,25 @@ export default function Portfolio() {
         <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Featured</h2>
         <div className="space-y-1">
           {portfolioData.featured.map((project, index) => (
-            <Link
+            <motion.div
               key={index}
-              href={project.url}
-              className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
+              whileHover={{ x: 4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              <span className="font-medium group-hover:text-primary transition-colors duration-150">{project.name}</span>
-              <div className="flex items-center gap-2">
-                <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150">{project.description}</span>
-                <CaretRight 
-                  size={14} 
-                  className="text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" 
-                />
-              </div>
-            </Link>
+              <Link
+                href={project.url}
+                className="flex items-center justify-between py-3 group cursor-pointer rounded-lg -mx-3 px-3 transition-colors duration-150 hover:bg-secondary/50"
+              >
+                <span className="font-medium group-hover:text-primary transition-colors duration-150">{project.name}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150">{project.description}</span>
+                  <CaretRight 
+                    size={14} 
+                    className="text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" 
+                  />
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -252,7 +258,11 @@ export default function Portfolio() {
           <div className="flex flex-col gap-8">
             {portfolioData.projects.map((project, index) => {
               const card = (
-                <div className="relative bg-card border border-border rounded-xl p-5 transition-all duration-300 hover:bg-secondary/50 hover:border-muted-foreground/20 group">
+                <motion.div
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="relative bg-card border border-border rounded-xl p-5 transition-colors duration-200 hover:bg-secondary/50 hover:border-muted-foreground/20 group"
+                >
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                     <div className="flex-1 min-w-0">
                       <span className="text-xs font-mono text-muted-foreground/60">
@@ -293,7 +303,7 @@ export default function Portfolio() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
 
               return project.slug ? (
