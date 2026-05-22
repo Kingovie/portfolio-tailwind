@@ -27,7 +27,7 @@ const portfolioData = {
     { name: "Project Two", description: "Design system used by 50+ engineers and designers", url: "#" }
   ],
   projects: [
-    { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods" },
+    { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/bringgoods-card.png" },
     { name: "Cribstock", category: "Web App", description: "Real estate investment platform enabling everyday Nigerians to co-own properties and earn rental income from their phones.", slug: "cribstock" },
     { name: "Health Tracker", category: "Mobile App", description: "A fitness tracking app that helps users monitor workouts, track progress, set goals, and analyze health metrics.", slug: null },
     { name: "Design System", category: "Systems", description: "A scalable design system with 100+ reusable components ensuring consistency across products.", slug: null }
@@ -249,40 +249,63 @@ export default function Portfolio() {
         </div>
 
         {viewMode === 'list' ? (
-          <div className="flex flex-col gap-6">
-            {portfolioData.projects.map((project, index) => (
-              <Link
-                key={index}
-                href={project.slug ? `/work/${project.slug}` : '#'}
-                className="group relative w-full transition-all duration-300 hover:scale-[1.01] block rounded-xl shadow-sm overflow-hidden"
-              >
-                <div className="flex flex-col md:grid md:grid-cols-2 gap-0 md:min-h-[180px]">
-                  <div className={`relative w-full h-[170px] md:h-full ${placeholderColors[index % placeholderColors.length]}`} />
-                  <div className="flex flex-col justify-between p-4 bg-card">
-                    <div>
-                      <h3 className="text-base font-semibold mb-2 group-hover:text-primary transition-colors">
-                        {project.name}
-                      </h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+          <div className="flex flex-col gap-8">
+            {portfolioData.projects.map((project, index) => {
+              const card = (
+                <div className="relative bg-card border border-border rounded-xl p-5 transition-all duration-300 hover:bg-secondary/50 hover:border-muted-foreground/20 group">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                    <div className="flex-1 min-w-0">
+                      <span className="text-xs font-mono text-muted-foreground/60">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <h3 className="text-lg font-semibold mt-1">{project.name}</h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed mt-1 max-w-xl">
                         {project.description}
                       </p>
-                      {project.slug ? (
-                        <span className="text-xs font-medium text-foreground/70 group-hover:text-foreground transition-colors">
-                          View case study →
-                        </span>
-                      ) : (
-                        <span className="text-xs text-muted-foreground/50">
-                          Coming soon
-                        </span>
-                      )}
                     </div>
-                    <div className="flex justify-end mt-2">
-                      <span className="text-xs text-muted-foreground/50">{project.category}</span>
+                    {project.slug ? (
+                      <Link
+                        href={`/work/${project.slug}`}
+                        className="shrink-0 inline-flex items-center px-4 py-1.5 bg-secondary text-muted-foreground rounded-full text-xs font-medium hover:text-foreground hover:bg-secondary/80 active:scale-95 transition-all"
+                      >
+                        View case study
+                      </Link>
+                    ) : (
+                      <span className="shrink-0 inline-flex items-center px-4 py-1.5 bg-secondary text-muted-foreground/40 rounded-full text-xs font-medium">
+                        Coming soon
+                      </span>
+                    )}
+                  </div>
+
+                  <hr className="border-border my-6" />
+
+                  <div className={`relative w-full aspect-[4/3] max-h-[300px] rounded-lg overflow-hidden ${project.image ? '' : placeholderColors[index % placeholderColors.length]}`}>
+                    {project.image && (
+                      <Image src={project.image} alt={project.name} fill className="object-cover" />
+                    )}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                      <span className={`px-5 py-2 rounded-full text-sm font-medium shadow-sm ${
+                        project.slug
+                          ? 'bg-foreground text-background'
+                          : 'bg-secondary text-foreground border border-border'
+                      }`}>
+                        {project.slug ? 'View Case Study' : 'Coming soon'}
+                      </span>
                     </div>
                   </div>
                 </div>
-              </Link>
-            ))}
+              );
+
+              return project.slug ? (
+                <Link key={index} href={`/work/${project.slug}`} className="block">
+                  {card}
+                </Link>
+              ) : (
+                <div key={index} className="block cursor-default">
+                  {card}
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-6">
@@ -292,7 +315,10 @@ export default function Portfolio() {
                 href={project.slug ? `/work/${project.slug}` : '#'}
                 className="group block transition-transform duration-200"
               >
-                <div className={`relative aspect-video rounded-lg mb-4 overflow-hidden transition-all duration-200 ${placeholderColors[index % placeholderColors.length]}`}>
+                <div className={`relative aspect-video rounded-lg mb-4 overflow-hidden transition-all duration-200 ${project.image ? '' : placeholderColors[index % placeholderColors.length]}`}>
+                  {project.image && (
+                    <Image src={project.image} alt={project.name} fill className="object-cover" />
+                  )}
                   <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     <span className="px-2 py-1 text-xs bg-foreground text-background rounded-lg">
                       View work

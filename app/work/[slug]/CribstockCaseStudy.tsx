@@ -100,7 +100,7 @@ export function CribstockCaseStudy() {
   const tocItems = [
     { id: 'context', label: 'The Context' },
     { id: 'problem', label: 'The Problem' },
-    { id: 'dashboard', label: 'The Dashboard' },
+    { id: 'dashboard', label: 'The Investor Dashboard' },
     { id: 'purchase-flow', label: 'Purchase Flow' },
     { id: 'presale-tracker', label: 'Presale Tracker' },
     { id: 'upcoming-presales', label: 'Upcoming Presales' },
@@ -200,10 +200,10 @@ export function CribstockCaseStudy() {
               <p className="text-sm text-muted-foreground italic font-serif mb-1">The context</p>
               <h2 className="text-xl font-semibold mb-4">Cribstock was already live. But something wasn't clicking.</h2>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Real estate in Nigeria — Lagos especially — has always been out of reach for most people. Cribstock was trying to fix that. Shares from ₦100,000. Rental income distributed to your wallet. Full ownership potential over five years.
+                In Nigeria, property ownership has always felt like something that happens to other people. The prices are high, the process is opaque, and for most working people the entry point simply doesn't exist. Cribstock was built to change that. You could own a fraction of a real property, earn rental income paid directly to your wallet, and start from as little as ₦20,000.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                The product worked. But when I joined, users were dropping off mid-purchase, the dashboard told you very little about what was happening with your money, and there was zero way to know what was coming next or to follow a presale as it played out. I was brought in to fix all of that.
+                The product was working. But when I joined, users were dropping off mid-purchase, the investor dashboard told you very little about what was happening with your money, and there was zero way to know what deals were coming or to follow a presale as it played out. I was brought in to fix all of that.
               </p>
             </section>
 
@@ -212,7 +212,7 @@ export function CribstockCaseStudy() {
               <p className="text-sm text-muted-foreground italic font-serif mb-1">The problem</p>
               <h2 className="text-xl font-semibold mb-4">Imagine being a first-time property investor.</h2>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                You've never owned real estate. You're being asked to put ₦100,000 into a building you can't physically touch. The app doesn't tell you how close the deal is to selling out. You can't see what's coming next month. And the dashboard — supposed to be the thing that makes you feel in control of your investment — doesn't really show you much.
+                You've never owned real estate before. You're being asked to put your money into a building you've never set foot in, trusting that the returns will come. The app doesn't show you how close the deal is to selling out. You can't see what's coming next month. And the investor dashboard, which is supposed to be the thing that makes you feel in control, doesn't really show you much at all.
               </p>
 
               <BlockQuote>
@@ -220,7 +220,7 @@ export function CribstockCaseStudy() {
               </BlockQuote>
 
               <p className="text-muted-foreground leading-relaxed">
-                That was the loop Cribstock was stuck in. Drop-offs in the purchase flow. Low urgency around presales. A dashboard that didn't earn trust. I had to fix the existing experience, and then design the features that were missing entirely.
+                That was the loop Cribstock was stuck in. Drop-offs in the purchase flow. Low urgency around presales. A dashboard that wasn't earning trust. I had to fix the existing experience and then design the features that were missing entirely.
               </p>
             </section>
 
@@ -229,9 +229,9 @@ export function CribstockCaseStudy() {
               <p className="text-sm text-muted-foreground italic font-serif mb-1">What I worked on</p>
               <h2 className="text-xl font-semibold mb-6">Four areas. Two revamps, three new features.</h2>
 
-              <h3 className="text-lg font-semibold mt-8 mb-3">01 — The dashboard</h3>
+              <h3 className="text-lg font-semibold mt-8 mb-3">01 — The investor dashboard</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                The existing dashboard was there, but it wasn't really doing its job. Investors couldn't quickly understand their portfolio value, what income they'd received, or what their wallet was doing. I redesigned it around what investors actually need to feel in control: value at a glance, income received, wallet activity. Clear hierarchy. No clutter.
+                The existing investor dashboard was there but it wasn't doing its job. Investors couldn't quickly understand their portfolio value, what income they had received, or what their wallet was doing. I redesigned it around what investors actually need to feel in control: value at a glance, income received, wallet activity. Clear hierarchy. No clutter.
               </p>
 
               <ImagePlaceholder label="[Dashboard — before & after]" caption="Side-by-side or stacked. Shows the redesign in context." />
@@ -242,7 +242,7 @@ export function CribstockCaseStudy() {
 
               <h3 className="text-lg font-semibold mt-8 mb-3">02 — The property purchase flow</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Buying a property share had too many steps, too much jargon, and not enough reassurance along the way. I stripped it back. I made the pricing concrete (₦100K per share), the returns tangible (up to ₦1M in rental income per deal), and the steps feel like something a person — not a compliance form — designed them.
+                Buying a property share had too many steps, too much jargon, and not enough reassurance along the way. I stripped it back. I made the pricing concrete, the returns tangible, and the steps feel like something a person designed rather than a compliance checklist.
               </p>
 
               <ImagePlaceholder label="[Purchase flow screens]" caption="2–3 sequential screens on mobile. A GIF showing the flow in motion is even better here." />
@@ -258,10 +258,10 @@ export function CribstockCaseStudy() {
                 <span className="inline-flex items-center ml-2 bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider align-middle">New</span>
               </h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                This one didn't exist before I joined. There was no way for an investor to see a presale unfolding in real time — how many shares had sold, how many were left, how close a property was to fully funded. I introduced a live progress tracker for each listing. Shares sold. Shares remaining. A counter that moves.
+                This one didn't exist before I joined. There was no way for an investor to see a presale unfolding in real time, how many shares had sold, how many were left, how close a property was to fully funded. I introduced a live progress tracker for each listing. Shares sold. Shares remaining. A counter that moves.
               </p>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                What I didn't fully anticipate was the psychological effect. When you can see a number going down, you don't want to wait. Investors started feeling urgency they hadn't felt before — not manufactured urgency, just the honest reality of limited supply made visible.
+                What I didn't fully anticipate was the psychological effect. When you can see a number going down, you don't want to wait. Investors started feeling urgency they hadn't felt before. Not manufactured urgency, just the honest reality of limited supply made visible.
               </p>
 
               <PMQuote author="Product Manager, Cribstock">
@@ -281,7 +281,7 @@ export function CribstockCaseStudy() {
                 <span className="inline-flex items-center ml-2 bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider align-middle">New</span>
               </h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                If investors didn't know what was coming, they had no reason to stay ready. I designed a dedicated upcoming deals page — each property listed before it opens, with the deal valuation, property type, and launch date visible. The goal was simple: let investors make up their mind before the clock starts. So when a presale drops, they're not deciding — they're acting.
+                If investors didn't know what was coming, they had no reason to stay ready. I designed a dedicated upcoming deals page showing future presales before they open, with the property details, deal valuation, and launch date visible. The goal was simple: let investors make up their mind before the clock starts. So when a presale drops, they're not deciding. They're acting.
               </p>
 
               <ImagePlaceholder label="[Upcoming presales page]" caption="Full-page or above-the-fold screenshot. Deal cards, valuations, launch dates visible." />
@@ -297,7 +297,7 @@ export function CribstockCaseStudy() {
                 <span className="inline-flex items-center ml-2 bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider align-middle">New</span>
               </h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Cribstock offers two products: co-ownership (long-term appreciation) and rental (monthly cashflow). Neither had a page that actually explained what the deal was. I designed new website pages for both. Co-ownership: shareholding structure, property valuation, exit timeline. Rental: income rate, payout schedule, occupancy status. The kind of information that turns "maybe" into "yes."
+                Cribstock offers two products: co-ownership (long-term appreciation) and rental (monthly cashflow). Neither had a page that actually explained what the deal was. I designed new website pages for both. The co-ownership page covers shareholding structure, property valuation, and exit timeline. The rental page covers income rate, payout schedule, and occupancy status. The kind of information that turns "maybe" into "yes."
               </p>
 
               <div className="grid grid-cols-2 gap-4 my-6">
@@ -311,7 +311,7 @@ export function CribstockCaseStudy() {
               <p className="text-sm text-muted-foreground italic font-serif mb-1">The process</p>
               <h2 className="text-xl font-semibold mb-4">I tested with real investors, not imagined ones.</h2>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                Every decision I made was informed by watching people who had never bought a property share try to do it. Not tech-savvy early adopters — working professionals who needed to feel confident handing over real money for something they couldn't physically see. Their hesitation and confusion told me exactly what to fix. Their relief when something worked told me I was on the right track.
+                Every decision I made was informed by watching people who had never bought a property share try to do it. Not tech-savvy early adopters but working professionals who needed to feel confident handing over real money for something they had never done before. Their hesitation and confusion told me exactly what to fix. Their relief when something worked told me I was on the right track.
               </p>
 
               <BlockQuote author="Cribstock user, via TechCabal">
@@ -319,7 +319,7 @@ export function CribstockCaseStudy() {
               </BlockQuote>
 
               <p className="text-muted-foreground leading-relaxed">
-                I worked with 2 PMs and 6 engineers across all of this. 50+ design specs shipped. 98% accuracy — meaning engineers almost never needed to come back with clarifying questions. I treated every spec as documentation, not just a handoff. That discipline cut revision cycles in half and kept us moving fast.
+                I worked with 2 PMs and 6 engineers across all of this. 50+ design specs shipped at 98% accuracy, which meant engineers almost never needed to come back with clarifying questions. I treated every spec as documentation, not just a handoff. That discipline cut revision cycles in half and kept us moving fast.
               </p>
             </section>
 
@@ -329,8 +329,8 @@ export function CribstockCaseStudy() {
               <h2 className="text-xl font-semibold mb-6">The numbers that came out the other side.</h2>
 
               <div className="grid grid-cols-3 gap-4">
-                <InsightCard value="80%" label="Faster property sell-out after presale revamp" highlighted />
-                <InsightCard value="₦500M+" label="Investments managed on the revamped dashboard" highlighted />
+                <InsightCard value="80%" label="Faster property sell-out after the presale revamp" highlighted />
+                <InsightCard value="₦500M+" label="Total investments on the revamped investor dashboard" highlighted />
                 <InsightCard value="50%" label="Increase in conversions from transparency features" />
                 <InsightCard value="30%" label="Drop in purchase flow abandonment" />
                 <InsightCard value="17K+" label="Users across 15+ countries" />
@@ -345,13 +345,13 @@ export function CribstockCaseStudy() {
 
               <div className="space-y-5">
                 <LearningItem number="1">
-                  <strong className="font-semibold text-foreground">Transparency is a conversion tool.</strong> Every time I made information more visible — live inventory, deal valuations, income breakdowns — investors responded. Trust and urgency aren't opposites. Showing people the real picture made them more likely to act, not less.
+                  <strong className="font-semibold text-foreground">Transparency is a conversion tool.</strong> Every time I made information more visible — live inventory, deal valuations, income breakdowns — investors responded. Trust and urgency are not opposites. Showing people the real picture made them more likely to act, not less.
                 </LearningItem>
                 <LearningItem number="2">
                   <strong className="font-semibold text-foreground">New features compound existing problems.</strong> Adding the presale tracker without fixing the purchase flow would have just created a new drop-off point. The order mattered: fix the broken flow first, then build the new thing on top of solid ground.
                 </LearningItem>
                 <LearningItem number="3">
-                  <strong className="font-semibold text-foreground">Working with engineers daily made my specs better.</strong> 98% accuracy didn't come from me being more careful — it came from me asking engineers questions every day. Understanding their constraints earlier meant fewer surprises at handoff.
+                  <strong className="font-semibold text-foreground">Working with engineers daily made my specs better.</strong> 98% accuracy didn't come from me being more careful. It came from asking engineers questions every day. Understanding their constraints earlier meant fewer surprises at handoff.
                 </LearningItem>
                 <LearningItem number="4">
                   <strong className="font-semibold text-foreground">The "upcoming" page changed investor behaviour before launch day.</strong> Getting investors thinking about a deal in advance — days or weeks before it opened — meant that by the time the presale started, they already had conviction. That pre-warming was probably half of the conversion lift.

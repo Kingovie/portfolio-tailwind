@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar } from '@phosphor-icons/react';
 
@@ -178,10 +179,9 @@ export function BringGoodsCaseStudy() {
               </p>
             </header>
 
-            <ImagePlaceholder
-              label="[BringGoods Product Mockup]"
-              caption="Buyer App • Seller Dashboard • Rider App"
-            />
+            <div className="relative rounded-lg overflow-hidden border border-border my-8" style={{ aspectRatio: '16/9', maxHeight: '500px' }}>
+              <Image src="/projects/bringgoods-wallet.png" alt="BringGoods Product Mockup" fill className="object-contain bg-secondary" />
+            </div>
 
             {/* Quick Facts */}
             <div className="grid grid-cols-4 gap-4 my-8 p-5 bg-card border border-border rounded-lg">
