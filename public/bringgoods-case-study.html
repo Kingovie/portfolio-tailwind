@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BringGoods: Ultra-Fast Fresh Food Delivery with Price Negotiation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .tag-amber {
+            background: #fef3c7;
+            color: #92400e;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.2rem;
+            margin: 30px 0;
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .quick-facts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .quick-fact-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .quick-fact-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .tldr {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 12px;
+            border-left: 4px solid #28a745;
+        }
+
+        .tldr h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #28a745;
+        }
+
+        section {
+            margin: 60px 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px;
+            color: #333;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .insight-section {
+            margin: 60px 0;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+        .insight-label {
+            font-size: 0.85rem;
+            color: #999;
+            font-style: italic;
+            font-family: Georgia, serif;
+            margin-bottom: 6px;
+        }
+
+        .insight-section h2 {
+            font-size: 1.6rem;
+        }
+
+        .impact-table {
+            width: 100%;
+            margin: 30px 0;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .impact-table th,
+        .impact-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .impact-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .impact-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .quote {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #28a745;
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        .quote-author {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #666;
+            font-style: normal;
+        }
+
+        .research-insights {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .research-insights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .research-insights li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .research-insights li:last-child {
+            border-bottom: none;
+        }
+
+        .research-insights li:before {
+            content: "\2192";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .research-meta {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .jtbd-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .jtbd-quote {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #444;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .jtbd-persona {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .feature-card .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+            margin-right: 8px;
+        }
+
+        .feature-card .dot.purple {
+            background: #8b5cf6;
+        }
+
+        .feature-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+        }
+
+        .feature-card .ai-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #7c3aed;
+            background: #f5f3ff;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .mockup-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .mockup-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .research-image-frame {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            background: #f8f9fa;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .research-image-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        .research-image-caption {
+            padding: 12px 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: white;
+        }
+
+        .research-image-caption .label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .research-image-caption .sub {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .theme-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .user-flow {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+
+        .user-flow h4 {
+            color: #28a745;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .flow-step {
+            background: #28a745;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .flow-step.buyer {
+            background: #10b981;
+        }
+
+        .flow-step.seller {
+            background: #3b82f6;
+        }
+
+        .flow-step.rider {
+            background: #f97316;
+        }
+
+        .flow-arrow {
+            color: #999;
+            font-size: 1.1rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .outcomes-table {
+            width: 100%;
+            margin: 30px 0;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .outcomes-table th,
+        .outcomes-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .outcomes-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .outcomes-table td:last-child {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .outcomes-table .strike {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+
+        .cta {
+            background: #1a1a1a;
+            color: white;
+            border-radius: 16px;
+            padding: 50px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .cta h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .cta a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        footer {
+            padding: 30px 0;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-facts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .theme-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mockup-placeholder {
+                height: 250px;
+                font-size: 0.9rem;
+            }
+
+            .hero-image {
+                height: 250px;
+            }
+
+            .cta {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BringGoods: Ultra-Fast Fresh Food Delivery with Price Negotiation</h1>
+            <div class="tags">
+                <span class="tag">product design</span>
+                <span class="tag">ux research</span>
+                <span class="tag">mobile app</span>
+                <span class="tag tag-amber">In Development</span>
+            </div>
+            <p>As Product Designer, I designed BringGoods — a hyperlocal e-commerce platform built to deliver fresh food in under 30 minutes (faster than boiling water) across Lagos, Nigeria. The platform introduced a unique negotiation-based marketplace where buyers request items at their preferred prices and receive competitive offers from nearby sellers in real time.</p>
+            <p>I designed the end-to-end experience for buyers, sellers, and riders, creating a system where buyers get fast delivery and fair pricing, sellers reach more customers digitally, and riders maximize earnings through optimized batch deliveries.</p>
+        </header>
+
+        <div class="hero-image">
+            <img src="/projects/bringgoods-wallet.png" alt="BringGoods Product Mockup">
+        </div>
+
+        <div class="quick-facts">
+            <div>
+                <div class="quick-fact-label">Role</div>
+                <div class="quick-fact-value">Product Designer</div>
+            </div>
+            <div>
+                <div class="quick-fact-label">Timeline</div>
+                <div class="quick-fact-value">8 Months</div>
+            </div>
+            <div>
+                <div class="quick-fact-label">Team</div>
+                <div class="quick-fact-value">1 Designer, 3 Engineers, 1 PM</div>
+            </div>
+            <div>
+                <div class="quick-fact-label">Focus</div>
+                <div class="quick-fact-value">UX Research, UI Design, AI Features</div>
+            </div>
+        </div>
+
+        <section id="problem">
+            <h2>The Problem Space</h2>
+            <p>Nigeria's fresh food market is broken in three specific ways. Buyers wait hours for delivery, sometimes 2 to 4 hours for items they could walk five minutes to buy. Sellers want to sell online but have no idea what to stock or how to price it. And riders? They are making single trips when they could be doing three at once.</p>
+            <p>But here is the thing nobody talks about: price negotiation is not optional here. Something like 92% of Nigerians expect to haggle in markets. It is not just about the price, it is the dance, the relationship. Every delivery app that has tried to enter this market offered fixed pricing, and every single one felt foreign because of it. Buyers felt powerless. Like they were being told what to pay with no say in the matter.</p>
+            <p>On the seller side, it is a different kind of broken. Most vendors in Lagos run on pure intuition. Years of it, sure, but intuition nonetheless. They do not have dashboards or demand forecasts. They buy what they think will sell and hope for the best. If I could give them data, real data about what people near them are actually ordering, that changes everything.</p>
+            <p>So the challenge was pretty clear: build a three-sided marketplace where buyers can negotiate, sellers get AI-powered intelligence, and riders can batch deliveries efficiently. And do it in a way that feels like it belongs in Lagos, not Silicon Valley.</p>
+            <p>The vision we are building toward: groceries delivered in under 30 minutes, before a kettle boils. Every local vendor becomes a digital entrepreneur.</p>
+        </section>
+
+        <section id="research">
+            <h2>Research</h2>
+            <p>I kicked things off with a month of fieldwork. Twenty user interviews across Lagos, talking to buyers, sellers, and riders, plus visits to about a dozen fresh food markets to watch how people actually transact. Not just observe, but hang around, chat, understand the rhythm of it.</p>
+            <p>What I found surprised me. The biggest friction is not logistical. It is psychological. Buyers feel disrespected by fixed prices. Sellers feel erased when they cannot negotiate. And riders? They just want to maximize their earnings per trip.</p>
+            <p>There was also this recurring theme I kept hearing: sellers wanted to grow but did not trust technology. Many had been burned by failed platforms before. So whatever I designed needed to feel familiar first, powerful second.</p>
+
+            <div class="research-image-frame">
+                <img src="/projects/market-research.png" alt="Research photos from Lagos markets">
+                <div class="research-image-caption">
+                    <div class="label">Research Photos, Lagos Markets</div>
+                    <div class="sub">Field visits to Mile 12, Oyingbo, and Ketu markets</div>
+                </div>
+            </div>
+
+            <div class="quote">
+                "The moment you remove negotiation from a Nigerian market, you have removed the humanity from the transaction."
+                <div class="quote-author">Research Participant, Oyingbo Market</div>
+            </div>
+
+            <p>Three key themes emerged from the research:</p>
+
+            <div class="theme-cards">
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Negotiation Is Culture</h4>
+                    <p>Not a feature request. Buyers expect to haggle and feel cheated when they cannot.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Sellers Need Intelligence</h4>
+                    <p>Most run on gut feel. They want data but do not know how to ask for it.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Trust Is Fragile</h4>
+                    <p>Sellers have been burned by tech platforms before. Onboarding needs to earn their confidence.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Time Is Money</h4>
+                    <p>Riders optimize instinctively but need tools to batch orders efficiently.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="insight-section">
+            <div class="insight-label">Key Design Decision 01</div>
+            <h2>Why Location-Based Pricing Was Always the Plan</h2>
+            <p>Here is something I want to be clear about: location-based pricing was in the plan from day one. It was not something we discovered we needed after launch. We knew going in that we had to prevent buyers from gamifying the system.</p>
+            <p>The scenario we wanted to avoid: a buyer sees tomatoes listed at ₦500, knows they can negotiate, and throws out ₦100 hoping the seller is desperate enough to accept. That is not negotiation, that is exploitation. And it wastes everyones time. The seller has to review and reject, the buyer gets frustrated, and the platform looks broken.</p>
+            <p>The solution we are building is what I call a <strong>community price floor</strong>, a dynamic anchor that keeps negotiations within a reasonable local range while keeping the haggling dynamic alive. Think of it like guardrails. Buyers can still negotiate and feel like they got a deal, but they cannot waste a sellers time with unserious offers. If tomatoes are ₦500 in Victoria Island, you can bargain down to maybe ₦400, but you cannot ask for ₦100.</p>
+            <p>This is still in active development, so I cannot give you hard numbers yet. But early co-design sessions with vendors in Lagos have been promising. The feedback keeps pointing to the same thing: design decisions have to respect local context. What works in San Francisco will not work in Surulere. That is not a bug. It is the whole point.</p>
+        </div>
+
+        <div class="insight-section">
+            <div class="insight-label">Key Design Decision 02</div>
+            <h2>Designing the AI Seller Dashboard</h2>
+            <p>The conventional wisdom says small vendors are afraid of AI. In my experience, that is only true if you show them a chatbot first. Show them something useful, like "here is what people in your area are buying right now," and they get it immediately.</p>
+            <p>After sellers verify their store, they get access to an AI-powered dashboard that guides their entire journey. I spent a lot of time thinking about what to prioritize here, and it came down to reducing uncertainty:</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4><span class="dot purple"></span> Inventory Assistant <span class="ai-badge">AI</span></h4>
+                    <p>AI looks at the sellers location, how much capital they have, and their power supply situation to suggest what items they should stock, backed by real demand data.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot purple"></span> Video Verification <span class="ai-badge">AI</span></h4>
+                    <p>Geolocation-locked video uploads. Sellers record at their actual store location. Keeps the platform honest without being intrusive.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot purple"></span> Store Insights <span class="ai-badge">AI</span></h4>
+                    <p>Real-time nudges when inventory is running low, items are about to expire, or prices are out of sync with the market.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot purple"></span> AI Optimizer <span class="ai-badge">AI</span></h4>
+                    <p>Analyzes performance patterns and suggests what to restock, what new products to try, and honestly, what to stop selling.</p>
+                </div>
+            </div>
+
+            <p>What I love about this setup is that the AI does not try to replace the sellers intuition. It augments it. A tomato seller in Mushin who has been doing this for fifteen years knows things the data does not. But the AI can tell her something she might not know, like the fact that demand for bell peppers spikes every Thursday in her area. That combination of intuition plus data? That is the sweet spot.</p>
+        </div>
+
+        <section id="solution">
+            <h2>Bringing It Together: The Three-Sided Design</h2>
+            <p>Three-sided marketplaces are tricky because each user has diametrically opposed needs. Buyers want low prices and speed. Sellers want profitability and simplicity. Riders want batch efficiency. If you optimize for one at the expense of the others, the whole thing falls apart.</p>
+            <p>My approach was to give each persona their own tailored interface, with AI doing the heavy lifting in the background to keep things balanced.</p>
+
+            <h3>Buyer Experience</h3>
+            <p>The buyer app is designed around one core action: getting what you want at a price that feels fair. Not the lowest price, just a fair one.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Price Setting & Bidding</h4>
+                    <p>Buyers name their price. The system applies the community floor so offers stay reasonable.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Seller Responses</h4>
+                    <p>Sellers can accept, counter, or let offers expire. Creates healthy competition.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Smart Checkout</h4>
+                    <p>Full cost breakdown before confirmation. Address locks after pre-calculation.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Real-Time Tracking</h4>
+                    <p>Processing to Packing to Dispatch. Visible at every stage.</p>
+                </div>
+            </div>
+            <div class="user-flow">
+                <h4>Buyer Flow</h4>
+                <div class="flow-steps">
+                    <span class="flow-step buyer">Select Items</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step buyer">Set Price</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step buyer">Seller Responds</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step buyer">Accept</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step buyer">Pay & Track</span>
+                </div>
+            </div>
+
+            <div class="mockup-placeholder">
+                [Product Gallery, Screen Mockups]
+                <br>
+                <span style="font-size: 0.85rem; opacity: 0.8;">Buyer App</span>
+            </div>
+
+            <h3>Seller Experience</h3>
+            <p>For sellers, the priority was making them feel in control while giving them tools they had never had before. The AI suggestions are just that: suggestions. The seller always makes the final call.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4><span class="dot purple"></span> AI Onboarding <span class="ai-badge">AI</span></h4>
+                    <p>Smart recommendations from day one based on their location and profile.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Verification</h4>
+                    <p>Video proof at their store location. Builds trust for buyers.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Quick Processing</h4>
+                    <p>Swipe "Ready for Pickup." Five minutes, done.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot purple"></span> AI Optimizer <span class="ai-badge">AI</span></h4>
+                    <p>Restock recommendations, expansion ideas, and performance trends.</p>
+                </div>
+            </div>
+            <div class="user-flow">
+                <h4>Seller Flow</h4>
+                <div class="flow-steps">
+                    <span class="flow-step seller">Verify Store</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step seller">AI Assistant</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step seller">Add Inventory</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step seller">Manage & Optimize</span>
+                </div>
+            </div>
+
+            <div class="mockup-placeholder">
+                [Seller Dashboard with AI Features, Wireframes]
+                <br>
+                <span style="font-size: 0.85rem; opacity: 0.8;">Inventory Assistant &bull; Store Insights &bull; AI Optimizer</span>
+            </div>
+
+            <h3>Rider Experience</h3>
+            <p>Riders are the backbone of the operation. If they are not efficient, nobody gets their food. The rider interface focuses on maximizing earning potential per trip.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Multi-Order Batching</h4>
+                    <p>Accept up to 3 orders at once. System optimizes the route.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Smart Routing</h4>
+                    <p>Pickup sequence optimized for minimal backtracking.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Verification System</h4>
+                    <p>Confirm arrival, scan pickup codes, verify items with sellers.</p>
+                </div>
+            </div>
+            <div class="user-flow">
+                <h4>Rider Flow</h4>
+                <div class="flow-steps">
+                    <span class="flow-step rider">Accept Orders</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step rider">Monitor</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step rider">Pickup Alert</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step rider">Verify</span>
+                    <span class="flow-arrow">&rarr;</span>
+                    <span class="flow-step rider">Next Stop</span>
+                </div>
+            </div>
+
+            <div class="mockup-placeholder">
+                [Rider App, Screen Mockups]
+                <br>
+                <span style="font-size: 0.85rem; opacity: 0.8;">Multi-Order Management &bull; Route Optimization</span>
+            </div>
+        </section>
+
+        <div class="insight-section">
+            <div class="insight-label">Key Design Decision 03</div>
+            <h2>The Iteration That Shaped the Product</h2>
+            <p>The negotiation flow went through three completely different versions before we landed on something that worked. And honestly? That is totally fine.</p>
+            <p><strong>V1:</strong> Buyers set a price, sellers accept or reject. Simple, clean, and it failed spectacularly in testing. 30% acceptance rate. Sellers felt like they had no agency. They either took the offer or got nothing.</p>
+            <p><strong>V2:</strong> Added counter-offers. Acceptance jumped to 60%, but now a new problem emerged: sellers felt rushed. They would get a notification and had to respond quickly or risk losing the sale. Some sellers told us it felt stressful, which was the opposite of what we wanted.</p>
+            <p><strong>V3:</strong> Quick accept buttons for sellers who want to win fast, plus automatic pricing rules for sellers who do not want to engage with every single offer. Acceptance hit 92% with test users. More importantly, sellers reported feeling in control again.</p>
+            <p>The lesson here: iteration is not scope creep, it is the actual design process. Test something, watch what happens, trust the data, evolve. Every version taught us something the previous one could not.</p>
+        </div>
+
+        <div class="insight-section">
+            <div class="insight-label">Key Design Decision 04</div>
+            <h2>Trust Lives in the Details</h2>
+            <p>Beyond the core flow, I added features that make the platform feel human. Not everything needs to move a metric. Some things just need to make someone feel looked after.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4><span class="dot"></span> BringGoods Academy</h4>
+                    <p>Free business training for sellers before they start. Helps them understand digital commerce on their own terms.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Real-Time Tracking</h4>
+                    <p>Processing to Packing to Dispatch. Target: 45% fewer support tickets.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Admin Console</h4>
+                    <p>Operations dashboard for monitoring marketplace health. We need to see what is working.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><span class="dot"></span> Pickup Verification</h4>
+                    <p>Codes at pickup prevent wrong orders. Small thing, huge trust builder.</p>
+                </div>
+            </div>
+
+            <p>These features do not drive the primary metrics, but they create emotional value. The goal is for users to feel cared for, not just served. That distinction matters a lot more than most product teams realize.</p>
+        </div>
+
+        <section id="outcomes">
+            <h2>Target Outcomes</h2>
+            <p>We are still building, so I cannot claim these as results yet. But these are the targets we are designing toward, the North Stars that guide every decision:</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">&lt;30 min</div>
+                    <div class="metric-label">Delivery Target</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3X</div>
+                    <div class="metric-label">Rider Earnings Goal</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">92%</div>
+                    <div class="metric-label">Negotiation Adoption Goal</div>
+                </div>
+            </div>
+
+            <table class="outcomes-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Current Reality</th>
+                        <th>Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Delivery Time</td>
+                        <td class="strike">2-4 hours</td>
+                        <td>Under 30 min</td>
+                    </tr>
+                    <tr>
+                        <td>Price Control</td>
+                        <td class="strike">Fixed only</td>
+                        <td>Buyer negotiation</td>
+                    </tr>
+                    <tr>
+                        <td>Seller Decisions</td>
+                        <td class="strike">Pure intuition</td>
+                        <td>AI-powered insights</td>
+                    </tr>
+                    <tr>
+                        <td>Rider Batching</td>
+                        <td class="strike">Single orders</td>
+                        <td>Up to 3 at once</td>
+                    </tr>
+                    <tr>
+                        <td>Seller Reach</td>
+                        <td class="strike">Physical store only</td>
+                        <td>Digital marketplace</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="cta">
+            <h3>Want to work together?</h3>
+            <p>I am open to product design opportunities. Reach out at <a href="mailto:ovie@shipwithai.com">ovie@shipwithai.com</a>.</p>
+        </div>
+
+        <footer>
+            <p>Case study: BringGoods, Lagos, Nigeria, 8 months, 24'-25'</p>
+        </footer>
+    </div>
+</body>
+</html>

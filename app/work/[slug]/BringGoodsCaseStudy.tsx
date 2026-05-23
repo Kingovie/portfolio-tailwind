@@ -104,6 +104,8 @@ export function BringGoodsCaseStudy() {
     { id: 'insight1', label: 'Location-Based Pricing' },
     { id: 'insight2', label: 'AI Seller Dashboard' },
     { id: 'solution', label: 'Three-Sided Design' },
+    { id: 'admin', label: 'Admin Console' },
+    { id: 'academy', label: 'BringGoods Academy' },
     { id: 'insight3', label: 'The Iteration' },
     { id: 'trust', label: 'Trust in the Details' },
     { id: 'outcomes', label: 'Target Outcomes' },
@@ -236,10 +238,18 @@ export function BringGoodsCaseStudy() {
                 There was also this recurring theme I kept hearing: sellers wanted to grow but did not trust technology. Many had been burned by failed platforms before. So whatever I designed needed to feel familiar first, powerful second.
               </p>
 
-              <ImagePlaceholder
-                label="[Research Photos, Lagos Markets]"
-                caption="Field visits to Mile 12, Oyingbo, and Ketu markets"
-              />
+              <div className="relative rounded-lg overflow-hidden border border-border bg-secondary my-8" style={{ aspectRatio: '16/9', maxHeight: '500px' }}>
+                <Image
+                  src="/projects/market-research.png"
+                  alt="Research photos from Lagos markets"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">Research Photos, Lagos Markets</p>
+                  <p className="text-xs text-white/70">Field visits to Mile 12, Oyingbo, and Ketu markets</p>
+                </div>
+              </div>
 
               <BlockQuote author="Research Participant, Oyingbo Market">
                 The moment you remove negotiation from a Nigerian market, you have removed the humanity from the transaction.
@@ -308,11 +318,6 @@ export function BringGoodsCaseStudy() {
               </p>
             </InsightSection>
 
-            <ImagePlaceholder
-              label="[Seller Dashboard with AI Features, Wireframes]"
-              caption="Inventory Assistant • Store Insights • AI Optimizer"
-            />
-
             {/* Bringing It Together */}
             <section id="solution" className="my-14">
               <h2 className="text-xl font-semibold mt-8 mb-4">Bringing It Together: The Three-Sided Design</h2>
@@ -343,6 +348,11 @@ export function BringGoodsCaseStudy() {
               </div>
               <FlowDiagram title="Buyer Flow" steps={['Select Items', 'Set Price', 'Seller Responds', 'Accept', 'Pay & Track']} />
 
+              <ImagePlaceholder
+                label="[Product Gallery, Screen Mockups]"
+                caption="Buyer App"
+              />
+
               <h3 className="text-lg font-semibold mt-8 mb-4">Seller Experience</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 For sellers, the priority was making them feel in control while giving them tools they had never had before. The AI suggestions are just that: suggestions. The seller always makes the final call.
@@ -363,6 +373,11 @@ export function BringGoodsCaseStudy() {
               </div>
               <FlowDiagram title="Seller Flow" steps={['Verify Store', 'AI Assistant', 'Add Inventory', 'Manage & Optimize']} />
 
+              <ImagePlaceholder
+                label="[Seller Dashboard with AI Features, Wireframes]"
+                caption="Inventory Assistant • Store Insights • AI Optimizer"
+              />
+
               <h3 className="text-lg font-semibold mt-8 mb-4">Rider Experience</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Riders are the backbone of the operation. If they are not efficient, nobody gets their food. The rider interface focuses on maximizing earning potential per trip.
@@ -379,6 +394,89 @@ export function BringGoodsCaseStudy() {
                 </FeatureCard>
               </div>
               <FlowDiagram title="Rider Flow" steps={['Accept Orders', 'Monitor', 'Pickup Alert', 'Verify', 'Next Stop']} />
+
+              <ImagePlaceholder
+                label="[Rider App, Screen Mockups]"
+                caption="Multi-Order Management • Route Optimization"
+              />
+            </section>
+
+            {/* Admin Console */}
+            <section id="admin" className="my-14">
+              <h2 className="text-xl font-semibold mt-8 mb-4">BringGoods Admin Console</h2>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                I designed the BringGoods Admin Console as the mission-critical command center for our operations team and management to monitor and control the entire three-sided marketplace in real-time. This centralized dashboard serves as the nerve system that keeps buyers, sellers, and riders coordinated while maintaining marketplace health and trust.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4 mt-5 mb-6">
+                <FeatureCard title="Real-Time Marketplace Monitoring">
+                  The dashboard surfaces critical KPIs including total orders, completion rates, average delivery times, and active orders in progress. Operations teams can instantly spot bottlenecks and intervene when needed.
+                </FeatureCard>
+                <FeatureCard title="User Management & Verification">
+                  Comprehensive oversight of buyer, seller, and rider onboarding with approval workflows, verification tracking, and churn analysis. This reduces fraud and maintains platform quality.
+                </FeatureCard>
+                <FeatureCard title="Financial Operations Center">
+                  Complete financial oversight including GMV tracking, seller/rider payouts, refund management, and commission monitoring. Ensures transparent and timely settlements across the marketplace.
+                </FeatureCard>
+                <FeatureCard title="Performance Analytics">
+                  Deep insights into rider efficiency, delivery accuracy, customer ratings, and platform uptime. Data-driven decision making to optimize marketplace operations.
+                </FeatureCard>
+              </div>
+
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                The admin console uses role-based permissions to protect sensitive data while enabling customer support teams to resolve disputes quickly. By centralizing operations, it allows BringGoods to scale efficiently while maintaining the quality and speed that defines our &quot;before kettle boils&quot; promise.
+              </p>
+
+              <ImagePlaceholder
+                label="[Admin Console Screenshots]"
+                caption="Dashboard & Analytics Views"
+              />
+            </section>
+
+            {/* BringGoods Academy */}
+            <section id="academy" className="my-14">
+              <h2 className="text-xl font-semibold mt-8 mb-4">BringGoods Academy</h2>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                Recognizing that many potential sellers lacked e-commerce experience, I designed the BringGoods Academy as both a training hub and strategic onboarding tool. This separate platform provides free business education before introducing sellers to our marketplace, ensuring they have the skills needed to succeed.
+              </p>
+
+              <h3 className="text-lg font-semibold mt-8 mb-4">Dual-Purpose Education Strategy</h3>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                The Academy serves two interconnected goals: first, it provides comprehensive business training on topics like product selection, pricing strategies, order handling, customer service, social media marketing, and compliance. Second, after completing the free training, participants learn how to leverage the BringGoods platform specifically for their business growth.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4 mt-5 mb-6">
+                <FeatureCard title="Business Fundamentals Training">
+                  Comprehensive modules covering product selection, competitive pricing, inventory management, customer service excellence, and digital marketing basics — essential skills for marketplace success.
+                </FeatureCard>
+                <FeatureCard title="Platform Integration Pathway">
+                  Seamless transition from general business education to BringGoods-specific training, including account setup, product listing optimization, and seller tool utilization.
+                </FeatureCard>
+                <FeatureCard title="Interactive Learning Experience">
+                  Video tutorials, knowledge-testing quizzes, and certification programs that ensure participants truly understand both business principles and platform mechanics.
+                </FeatureCard>
+                <FeatureCard title="Compliance & Quality Focus">
+                  Special emphasis on food safety standards, business regulations, and marketplace policies — crucial for fresh food sellers in Nigeria&apos;s regulatory environment.
+                </FeatureCard>
+              </div>
+
+              <h3 className="text-lg font-semibold mt-8 mb-4">Target Audience & Impact</h3>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                The Academy primarily serves aspiring entrepreneurs with little business experience, first-time e-commerce sellers needing guidance, and existing market traders wanting to digitize their operations. By providing free, comprehensive education, we ensure sellers enter the marketplace prepared for success rather than learning through costly mistakes.
+              </p>
+
+              <BlockQuote author="Kemi Adebayo, Fresh Produce Seller, Academy Graduate">
+                The BringGoods Academy taught me everything I needed to know about running an online business. After completing the program, setting up my store was so much easier — I already understood pricing, customer service, and how to use social media to grow my sales.
+              </BlockQuote>
+
+              <ImagePlaceholder
+                label="[BringGoods Academy Screenshots]"
+                caption="Course Interface & Certification System"
+              />
+
+              <p className="text-muted-foreground leading-relaxed">
+                This educational approach differentiates BringGoods from competitors by investing in seller success rather than simply providing a platform. Well-trained sellers provide better service, leading to higher buyer satisfaction and stronger marketplace growth.
+              </p>
             </section>
 
             {/* Key Design Decision 03 */}
@@ -425,11 +523,6 @@ export function BringGoodsCaseStudy() {
                 These features do not drive the primary metrics, but they create emotional value. The goal is for users to feel cared for, not just served. That distinction matters a lot more than most product teams realize.
               </p>
             </InsightSection>
-
-            <ImagePlaceholder
-              label="[Product Gallery, Screen Mockups]"
-              caption="Buyer App • Seller Dashboard • Rider App • Admin Console • Academy"
-            />
 
             {/* Target Outcomes */}
             <section id="outcomes" className="my-14">
