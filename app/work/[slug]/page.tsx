@@ -1,5 +1,7 @@
-import { BringGoodsCaseStudy } from './BringGoodsCaseStudy';
-import { CribstockCaseStudy } from './CribstockCaseStudy';
+import dynamic from 'next/dynamic';
+
+const BringGoodsCaseStudy = dynamic(() => import('./BringGoodsCaseStudy').then(m => m.BringGoodsCaseStudy));
+const CribstockCaseStudy = dynamic(() => import('./CribstockCaseStudy').then(m => m.CribstockCaseStudy));
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
