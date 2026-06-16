@@ -330,11 +330,14 @@ export function BringGoodsCaseStudy() {
 
               <h3 className="text-lg font-semibold mt-8 mb-4">Buyer Experience</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
-                The buyer app is designed around one core action: getting what you want at a price that feels fair. Not the lowest price, just a fair one.
+                The buyer app is designed around one core action: getting what you want at a price that feels fair. Not the lowest price, just a fair one. Before buyers can start shopping, they go through a lightweight onboarding that sets expectations and builds trust from the start.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-4">
+                <FeatureCard title="Frictionless Onboarding">
+                  Phone number sign-up with OTP, then a quick tutorial that explains how negotiation works on BringGoods — so buyers know what fair pricing looks like before they start.
+                </FeatureCard>
                 <FeatureCard title="Price Setting & Bidding">
-                  Buyers name their price. The system applies the community floor so offers stay reasonable.
+                  Tap an item, pick the size or variant you want, then name your price. The system applies the community floor so offers stay reasonable.
                 </FeatureCard>
                 <FeatureCard title="Seller Responses">
                   Sellers can accept, counter, or let offers expire. Creates healthy competition.
@@ -346,12 +349,15 @@ export function BringGoodsCaseStudy() {
                   Processing to Packing to Dispatch. Visible at every stage.
                 </FeatureCard>
               </div>
-              <FlowDiagram title="Buyer Flow" steps={['Select Items', 'Set Price', 'Seller Responds', 'Accept', 'Pay & Track']} />
+              <FlowDiagram title="Buyer Flow" steps={['Onboarding', 'Select Items', 'Set Price', 'Seller Responds', 'Accept', 'Pay & Track']} />
 
-              <ImagePlaceholder
-                label="[Product Gallery, Screen Mockups]"
-                caption="Buyer App"
-              />
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <img src="/projects/Buyers Flow - Onboarding.png" alt="Buyer App - Onboarding and Shopping Flow" className="w-full h-auto" />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">Buyer App</p>
+                  <p className="text-xs text-white/70">Key Onboarding & Shopping Moments</p>
+                </div>
+              </div>
 
               <h3 className="text-lg font-semibold mt-8 mb-4">Seller Experience</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -371,7 +377,7 @@ export function BringGoodsCaseStudy() {
                   Restock recommendations, expansion ideas, and performance trends.
                 </FeatureCard>
               </div>
-              <FlowDiagram title="Seller Flow" steps={['Verify Store', 'AI Assistant', 'Add Inventory', 'Manage & Optimize']} />
+              <FlowDiagram title="Seller Flow" steps={['Onboarding', 'Verify Store', 'AI Assistant', 'Add Inventory', 'Manage & Optimize']} />
 
               <ImagePlaceholder
                 label="[Seller Dashboard with AI Features, Wireframes]"
@@ -393,7 +399,7 @@ export function BringGoodsCaseStudy() {
                   Confirm arrival, scan pickup codes, verify items with sellers.
                 </FeatureCard>
               </div>
-              <FlowDiagram title="Rider Flow" steps={['Accept Orders', 'Monitor', 'Pickup Alert', 'Verify', 'Next Stop']} />
+              <FlowDiagram title="Rider Flow" steps={['Onboarding', 'Accept Orders', 'Monitor', 'Pickup Alert', 'Verify', 'Next Stop']} />
 
               <ImagePlaceholder
                 label="[Rider App, Screen Mockups]"
