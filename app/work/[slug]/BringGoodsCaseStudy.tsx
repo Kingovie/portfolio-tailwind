@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Calendar } from '@phosphor-icons/react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Calendar, Envelope } from '@phosphor-icons/react';
 
 function FeatureCard({ title, children, ai }: { title: string; children: React.ReactNode; ai?: boolean }) {
   return (
@@ -22,7 +23,7 @@ function FlowDiagram({ title, steps, color }: { title: string; steps: string[]; 
   const colors: Record<string, string> = {
     'Buyer Flow': 'bg-emerald-500',
     'Seller Flow': 'bg-blue-500',
-    'Rider Flow': 'bg-orange-500',
+    'Rider Flow': 'bg-purple-500',
   };
   const bgColor = color || colors[title] || 'bg-primary';
 
@@ -73,6 +74,51 @@ function InsightSection({ id, label, title, children }: { id: string; label: str
         <p className="text-sm text-muted-foreground italic font-serif mb-1">{label}</p>
         <h2 className="text-xl font-semibold mb-4">{title}</h2>
         {children}
+      </div>
+    </section>
+  );
+}
+
+function CTASection() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setMousePos({ x, y });
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative my-12 bg-foreground text-background rounded-xl overflow-hidden border border-border"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+    >
+      <div className="px-8 py-10 relative">
+        <Envelope size={160} weight="light" className="absolute right-4 top-1/2 -translate-y-1/2 text-white/10" />
+        <h3 className="text-xl font-semibold mb-2">Building something ambitious?</h3>
+        <p className="text-sm text-background/60 leading-relaxed max-w-md">
+          Whether you&apos;re launching from scratch or refining an existing product, I&apos;d love to hear what you&apos;re working on.
+        </p>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{
+            opacity: isHovered ? 1 : 0,
+            scale: isHovered ? 1 : 0.8,
+            x: mousePos.x - 48,
+            y: mousePos.y - 48,
+          }}
+          transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+          className="absolute left-0 top-0 w-24 h-24 rounded-full bg-white text-foreground flex items-center justify-center text-sm font-medium shadow-lg"
+        >
+          <a href="mailto:miichealovie33@gmail.com" className="w-full h-full rounded-full flex items-center justify-center">Send a Mail</a>
+        </motion.div>
       </div>
     </section>
   );
@@ -182,7 +228,7 @@ export function BringGoodsCaseStudy() {
             </header>
 
             <div className="relative rounded-lg overflow-hidden border border-border my-8" style={{ aspectRatio: '16/9', maxHeight: '500px' }}>
-              <Image src="/projects/bringgoods-wallet.png" alt="BringGoods Product Mockup" fill className="object-contain bg-secondary" />
+              <Image src="/projects/bringgoods-wallet.png" alt="BringGoods Product Mockup" fill className="object-contain bg-secondary select-none" draggable="false" onContextMenu={(e) => e.preventDefault()} />
             </div>
 
             {/* Quick Facts */}
@@ -243,7 +289,9 @@ export function BringGoodsCaseStudy() {
                   src="/projects/market-research.png"
                   alt="Research photos from Lagos markets"
                   fill
-                  className="object-cover"
+                  className="object-cover select-none"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-medium text-white/90">Research Photos, Lagos Markets</p>
@@ -352,7 +400,7 @@ export function BringGoodsCaseStudy() {
               <FlowDiagram title="Buyer Flow" steps={['Onboarding', 'Select Items', 'Set Price', 'Seller Responds', 'Accept', 'Pay & Track']} />
 
               <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
-                <img src="/projects/Buyers Flow - Onboarding.png" alt="Buyer App - Onboarding and Shopping Flow" className="w-full h-auto" />
+                <img src="/projects/Buyers Flow - Onboarding.png" alt="Buyer App - Onboarding and Shopping Flow" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-medium text-white/90">Buyer App</p>
                   <p className="text-xs text-white/70">Key Onboarding & Shopping Moments</p>
@@ -379,10 +427,13 @@ export function BringGoodsCaseStudy() {
               </div>
               <FlowDiagram title="Seller Flow" steps={['Onboarding', 'Verify Store', 'AI Assistant', 'Add Inventory', 'Manage & Optimize']} />
 
-              <ImagePlaceholder
-                label="[Seller Dashboard with AI Features, Wireframes]"
-                caption="Inventory Assistant • Store Insights • AI Optimizer"
-              />
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <img src="/projects/Sellers Flow - Onboarding.png" alt="Seller App - Onboarding and Store Management" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">Seller App</p>
+                  <p className="text-xs text-white/70">Key Onboarding & Store Management Moments</p>
+                </div>
+              </div>
 
               <h3 className="text-lg font-semibold mt-8 mb-4">Rider Experience</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -401,10 +452,13 @@ export function BringGoodsCaseStudy() {
               </div>
               <FlowDiagram title="Rider Flow" steps={['Onboarding', 'Accept Orders', 'Monitor', 'Pickup Alert', 'Verify', 'Next Stop']} />
 
-              <ImagePlaceholder
-                label="[Rider App, Screen Mockups]"
-                caption="Multi-Order Management • Route Optimization"
-              />
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <img src="/projects/Rider Flow - Onboarding.png" alt="Rider App - Onboarding and Delivery Flow" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">Rider App</p>
+                  <p className="text-xs text-white/70">Key Onboarding & Delivery Moments</p>
+                </div>
+              </div>
             </section>
 
             {/* Admin Console */}
@@ -433,10 +487,13 @@ export function BringGoodsCaseStudy() {
                 The admin console uses role-based permissions to protect sensitive data while enabling customer support teams to resolve disputes quickly. By centralizing operations, it allows BringGoods to scale efficiently while maintaining the quality and speed that defines our &quot;before kettle boils&quot; promise.
               </p>
 
-              <ImagePlaceholder
-                label="[Admin Console Screenshots]"
-                caption="Dashboard & Analytics Views"
-              />
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <img src="/projects/Admin console.png" alt="BringGoods Admin Console" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">Admin Console</p>
+                  <p className="text-xs text-white/70">Dashboard & Analytics Views</p>
+                </div>
+              </div>
             </section>
 
             {/* BringGoods Academy */}
@@ -475,10 +532,13 @@ export function BringGoodsCaseStudy() {
                 The BringGoods Academy taught me everything I needed to know about running an online business. After completing the program, setting up my store was so much easier — I already understood pricing, customer service, and how to use social media to grow my sales.
               </BlockQuote>
 
-              <ImagePlaceholder
-                label="[BringGoods Academy Screenshots]"
-                caption="Course Interface & Certification System"
-              />
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <img src="/projects/Bringgood Academy.png" alt="BringGoods Academy" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">BringGoods Academy</p>
+                  <p className="text-xs text-white/70">Course Interface</p>
+                </div>
+              </div>
 
               <p className="text-muted-foreground leading-relaxed">
                 This educational approach differentiates BringGoods from competitors by investing in seller success rather than simply providing a platform. Well-trained sellers provide better service, leading to higher buyer satisfaction and stronger marketplace growth.
@@ -581,12 +641,7 @@ export function BringGoodsCaseStudy() {
             </section>
 
             {/* CTA */}
-            <div className="bg-foreground text-background rounded-xl p-10 my-16 text-center">
-              <h3 className="text-xl font-semibold mb-3 text-background">Want to work together?</h3>
-              <p className="text-background/75 text-sm leading-relaxed">
-                I am open to product design opportunities. Reach out at <a href="mailto:ovie@shipwithai.com" className="text-background underline">ovie@shipwithai.com</a>.
-              </p>
-            </div>
+            <CTASection />
 
             {/* Footer */}
             <footer className="py-6 border-t border-border mt-8">
