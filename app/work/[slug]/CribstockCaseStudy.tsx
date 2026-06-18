@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Calendar } from '@phosphor-icons/react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Calendar, Envelope } from '@phosphor-icons/react';
 
 function FeatureCard({ title, children, tag }: { title: string; children: React.ReactNode; tag?: string }) {
   return (
@@ -74,6 +75,51 @@ function LearningItem({ number, children }: { number: string; children: React.Re
       <span className="font-serif text-lg text-muted-foreground shrink-0 w-5 pt-0.5">{number}</span>
       <p className="text-sm text-muted-foreground leading-relaxed">{children}</p>
     </div>
+  );
+}
+
+function CTASection() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setMousePos({ x, y });
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative my-12 bg-foreground text-background rounded-xl overflow-hidden border border-border"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+    >
+      <div className="px-8 py-10 relative">
+        <Envelope size={160} weight="light" className="absolute right-4 top-1/2 -translate-y-1/2 text-white/10" />
+        <h3 className="text-xl font-semibold mb-2">Building something ambitious?</h3>
+        <p className="text-sm text-background/60 leading-relaxed max-w-md">
+          Whether you&apos;re launching from scratch or refining an existing product, I&apos;d love to hear what you&apos;re working on.
+        </p>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{
+            opacity: isHovered ? 1 : 0,
+            scale: isHovered ? 1 : 0.8,
+            x: mousePos.x - 48,
+            y: mousePos.y - 48,
+          }}
+          transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+          className="absolute left-0 top-0 w-24 h-24 rounded-full bg-white text-foreground flex items-center justify-center text-sm font-medium shadow-lg"
+        >
+          <a href="mailto:miichealovie33@gmail.com" className="w-full h-full rounded-full flex items-center justify-center">Send a Mail</a>
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
@@ -300,7 +346,7 @@ export function CribstockCaseStudy() {
                 Cribstock offers two products: co-ownership (long-term appreciation) and rental (monthly cashflow). Neither had a page that actually explained what the deal was. I designed new website pages for both. The co-ownership page covers shareholding structure, property valuation, and exit timeline. The rental page covers income rate, payout schedule, and occupancy status. The kind of information that turns "maybe" into "yes."
               </p>
 
-              <div className="grid grid-cols-2 gap-4 my-6">
+              <div className="my-6 space-y-6">
                 <ImagePlaceholder label="[Co-ownership page]" caption="Shareholding, valuation, exit timeline." />
                 <ImagePlaceholder label="[Rental detail page]" caption="Income rate, payout cadence, occupancy." />
               </div>
@@ -360,12 +406,7 @@ export function CribstockCaseStudy() {
             </section>
 
             {/* CTA */}
-            <div className="bg-foreground text-background rounded-xl p-10 my-16 text-center">
-              <h3 className="text-xl font-semibold mb-3 text-background">Want to work together?</h3>
-              <p className="text-background/75 text-sm leading-relaxed">
-                I am open to product design opportunities. Reach out at <a href="mailto:ovie@shipwithai.com" className="text-background underline">ovie@shipwithai.com</a>.
-              </p>
-            </div>
+            <CTASection />
 
             {/* Footer */}
             <footer className="py-6 border-t border-border mt-8">
