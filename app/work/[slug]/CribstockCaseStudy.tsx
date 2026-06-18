@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, Envelope } from '@phosphor-icons/react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, Calendar, Envelope, CaretLeft, CaretRight } from '@phosphor-icons/react';
 
 function FeatureCard({ title, children, tag }: { title: string; children: React.ReactNode; tag?: string }) {
   return (
@@ -125,6 +126,11 @@ function CTASection() {
 
 export function CribstockCaseStudy() {
   const [activeHeading, setActiveHeading] = useState('');
+  const [slideIndex, setSlideIndex] = useState(0);
+  const slides = [
+    { src: '/projects/Before and after.png', alt: 'Dashboard before and after — desktop', title: 'Dashboard — before & after', caption: 'Desktop view showing the redesign in context' },
+    { src: '/projects/Mobile before and after.png', alt: 'Dashboard before and after — mobile', title: 'Dashboard — before & after', caption: 'Mobile view showing the redesign in context' },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -280,11 +286,36 @@ export function CribstockCaseStudy() {
                 The existing investor dashboard was there but it wasn't doing its job. Investors couldn't quickly understand their portfolio value, what income they had received, or what their wallet was doing. I redesigned it around what investors actually need to feel in control: value at a glance, income received, wallet activity. Clear hierarchy. No clutter.
               </p>
 
-              <ImagePlaceholder label="[Dashboard — before & after]" caption="Side-by-side or stacked. Shows the redesign in context." />
-
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                The dashboard now handles ₦500M+ in investments and processes 5,000+ wallet transactions every month.
-              </p>
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <div className="relative aspect-[6000/4898]">
+                  <AnimatePresence initial={false}>
+                    <motion.div
+                      key={slideIndex}
+                      initial={{ opacity: 0, x: 80 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -80 }}
+                      transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="absolute inset-0"
+                    >
+                      <img src={slides[slideIndex].src} alt={slides[slideIndex].alt} className="w-full h-full object-contain select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                    </motion.div>
+                  </AnimatePresence>
+                  <button onClick={() => setSlideIndex((slideIndex - 1 + slides.length) % slides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/15 hover:bg-black/30 text-white flex items-center justify-center transition-colors">
+                    <CaretLeft size={16} weight="bold" />
+                  </button>
+                  <button onClick={() => setSlideIndex((slideIndex + 1) % slides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/15 hover:bg-black/30 text-white flex items-center justify-center transition-colors">
+                    <CaretRight size={16} weight="bold" />
+                  </button>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 pointer-events-none">
+                  <p className="text-sm font-medium text-white/90">{slides[slideIndex].title}</p>
+                  <p className="text-xs text-white/70">{slides[slideIndex].caption}</p>
+                </div>
+                <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 text-white text-xs font-medium">
+                  <span className={slideIndex === 0 ? 'text-white' : 'text-white/40'}>&#x2022;</span>
+                  <span className={slideIndex === 1 ? 'text-white' : 'text-white/40'}>&#x2022;</span>
+                </div>
+              </div>
 
               <h3 className="text-lg font-semibold mt-8 mb-3">02 — The property purchase flow</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
