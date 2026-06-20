@@ -265,7 +265,7 @@ export default function Portfolio() {
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   className="relative bg-card border border-border rounded-xl p-5 transition-colors duration-200 hover:bg-secondary/50 hover:border-muted-foreground/20 group"
                 >
-                  <div className="flex flex-row justify-between items-start gap-4">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                     <div className="flex-1 min-w-0">
                       <span className="text-xs font-mono text-muted-foreground/60">
                         {String(index + 1).padStart(2, '0')}
@@ -275,18 +275,20 @@ export default function Portfolio() {
                         {project.description}
                       </p>
                     </div>
-                    {project.slug ? (
-                      <Link
-                        href={`/work/${project.slug}`}
-                        className="shrink-0 inline-flex items-center px-4 py-1.5 bg-secondary text-muted-foreground rounded-full text-xs font-medium hover:text-foreground hover:bg-secondary/80 active:scale-95 transition-all"
-                      >
-                        View case study
-                      </Link>
-                    ) : (
-                      <span className="shrink-0 inline-flex items-center px-4 py-1.5 bg-secondary text-muted-foreground/40 rounded-full text-xs font-medium">
-                        Coming soon
-                      </span>
-                    )}
+                    <div className="self-end md:self-auto">
+                      {project.slug ? (
+                        <Link
+                          href={`/work/${project.slug}`}
+                          className="shrink-0 inline-flex items-center px-4 py-1.5 bg-secondary text-muted-foreground rounded-full text-xs font-medium hover:text-foreground hover:bg-secondary/80 active:scale-95 transition-all"
+                        >
+                          View case study
+                        </Link>
+                      ) : (
+                        <span className="shrink-0 inline-flex items-center px-4 py-1.5 bg-secondary text-muted-foreground/40 rounded-full text-xs font-medium">
+                          Coming soon
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <hr className="border-border my-6" />
