@@ -31,7 +31,7 @@ const portfolioData = {
     { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/Scene-1.png" },
     { name: "Cribstock", category: "Web App", description: "Real estate investment platform enabling everyday Nigerians to co-own properties and earn rental income from their phones.", slug: "cribstock", image: "/projects/cribstock-card.png" },
     { name: "Yobulu", category: "Mobile App", description: "A unified financial ecosystem that gives users access to CFD markets, cryptocurrencies, stocks, P2P trading, event-based investments, and everyday banking services through a seamless experience.", slug: null, image: "/projects/yobulu-card.jpg" },
-    { name: "Espee Marketplace", category: "Marketplace", description: "A digital commerce platform that allows buyers to discover products, sellers to grow their businesses, and both parties to transact using Espees (SPS).", slug: null, image: "/projects/espee-market-card.jpg" }
+    { name: "Espee Marketplace", category: "Marketplace", description: "A digital commerce platform that allows buyers to discover products, sellers to grow their businesses, and both parties to transact using Espees (SPS).", slug: null, image: "/projects/espee-market-card.png" }
   ],
   writing: [
     { title: "Putting Ideas into Words", author: "Paul Graham", url: "https://paulgraham.com/words.html" },

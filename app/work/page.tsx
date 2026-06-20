@@ -42,7 +42,7 @@ const projects = [
     description: 'A digital commerce platform that allows buyers to discover products, sellers to grow their businesses, and both parties to transact using Espees (SPS).',
     date: '2026',
     tags: ['case study', 'product design', 'web app'],
-    image: '/projects/espee-market-card.jpg',
+    image: '/projects/espee-market-card.png',
     status: 'in development',
     linkable: false,
   },
