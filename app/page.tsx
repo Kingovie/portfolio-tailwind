@@ -265,7 +265,7 @@ export default function Portfolio() {
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   className="relative bg-card border border-border rounded-xl p-5 transition-colors duration-200 hover:bg-secondary/50 hover:border-muted-foreground/20 group"
                 >
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                  <div className="flex flex-row justify-between items-start gap-4">
                     <div className="flex-1 min-w-0">
                       <span className="text-xs font-mono text-muted-foreground/60">
                         {String(index + 1).padStart(2, '0')}
