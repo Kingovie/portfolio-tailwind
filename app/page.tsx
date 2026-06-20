@@ -265,17 +265,17 @@ export default function Portfolio() {
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   className="relative bg-card border border-border rounded-xl p-5 transition-colors duration-200 hover:bg-secondary/50 hover:border-muted-foreground/20 group"
                 >
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                  <div className="flex flex-row justify-between items-start gap-2 sm:gap-4">
                     <div className="flex-1 min-w-0">
                       <span className="text-xs font-mono text-muted-foreground/60">
                         {String(index + 1).padStart(2, '0')}
                       </span>
                       <h3 className="text-lg font-semibold mt-1">{project.name}</h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed mt-1 max-w-xl">
+                      <p className="text-xs text-muted-foreground leading-relaxed mt-1">
                         {project.description}
                       </p>
                     </div>
-                    <div className="self-end md:self-auto">
+                    <div className="shrink-0">
                       {project.slug ? (
                         <Link
                           href={`/work/${project.slug}`}
