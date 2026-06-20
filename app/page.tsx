@@ -298,7 +298,7 @@ export default function Portfolio() {
                     {project.image && (
                       <Image src={project.image} alt={project.name} fill className="object-cover" />
                     )}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                    <div className="absolute inset-0 flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                       <span className={`px-5 py-2 rounded-full text-sm font-medium shadow-sm ${
                         project.slug
                           ? 'bg-foreground text-background'
