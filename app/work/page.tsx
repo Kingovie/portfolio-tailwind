@@ -109,8 +109,8 @@ export default function WorkPage() {
                       {project.description}
                     </p>
                     
-                    <div className="flex items-center justify-between">
-                      <div className="flex flex-wrap gap-2">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex flex-wrap gap-2 min-w-0">
                         {project.tags.map((tag, index) => (
                           <span 
                             key={index}
@@ -121,7 +121,7 @@ export default function WorkPage() {
                         ))}
                       </div>
                       
-                      <span className="text-sm text-muted-foreground flex items-center gap-2">
+                      <span className="shrink-0 text-sm text-muted-foreground flex items-center gap-2">
                         <Calendar size={14} weight="bold" />
                         {project.date}
                       </span>
@@ -156,8 +156,8 @@ export default function WorkPage() {
                     {project.description}
                   </p>
                   
-                  <div className="flex items-center justify-between">
-                    <div className="flex flex-wrap gap-2">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex flex-wrap gap-2 min-w-0">
                       {project.tags.map((tag, index) => (
                         <span 
                           key={index}
@@ -168,7 +168,7 @@ export default function WorkPage() {
                       ))}
                     </div>
                     
-                    <span className="text-sm text-muted-foreground flex items-center gap-2">
+                    <span className="shrink-0 text-sm text-muted-foreground flex items-center gap-2">
                       <Calendar size={14} weight="bold" />
                       {project.date}
                     </span>

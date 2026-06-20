@@ -127,7 +127,7 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-20">
+    <div className="max-w-2xl mx-auto px-6 py-12 md:py-20">
       {/* Header */}
       <header className="mb-16">
         {/* Profile Image */}
@@ -362,8 +362,8 @@ export default function Portfolio() {
                 rel="noopener noreferrer"
                 className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
               >
-              <span className="font-medium group-hover:text-primary transition-colors duration-150">{article.title}</span>
-              <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150">{article.author}</span>
+              <span className="font-medium group-hover:text-primary transition-colors duration-150 truncate min-w-0">{article.title}</span>
+              <span className="shrink-0 text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150 ml-4">{article.author}</span>
             </a>
           ))}
         </div>
