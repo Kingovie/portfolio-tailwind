@@ -220,16 +220,14 @@ export default function Portfolio() {
             >
               <Link
                 href={project.url}
-                className="flex items-center justify-between py-4 md:py-3 group cursor-pointer rounded-lg -mx-3 px-3 transition-colors duration-150 hover:bg-secondary/50"
+                className="grid grid-cols-[auto_1fr_auto] items-center gap-3 py-3 md:py-2 group cursor-pointer rounded-lg -mx-3 px-3 transition-colors duration-150 hover:bg-secondary/50"
               >
-                <span className="font-medium shrink-0 group-hover:text-primary transition-colors duration-150">{project.name}</span>
-                <div className="flex items-center gap-2 ml-4 md:ml-0">
-                  <span className="text-muted-foreground text-sm text-right group-hover:text-foreground transition-colors duration-150">{project.description}</span>
-                  <CaretRight 
-                    size={14} 
-                    className="shrink-0 text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" 
-                  />
-                </div>
+                <span className="font-medium group-hover:text-primary transition-colors duration-150">{project.name}</span>
+                <span className="text-muted-foreground text-sm text-right leading-snug group-hover:text-foreground transition-colors duration-150">{project.description}</span>
+                <CaretRight 
+                  size={14} 
+                  className="text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" 
+                />
               </Link>
             </motion.div>
           ))}
