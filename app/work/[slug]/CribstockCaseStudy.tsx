@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Calendar, Envelope, CaretLeft, CaretRight } from '@phosphor-icons/react';
+import { ArrowLeft, ArrowUpRight, Calendar, Envelope, CaretLeft, CaretRight } from '@phosphor-icons/react';
 
 function FeatureCard({ title, children, tag }: { title: string; children: React.ReactNode; tag?: string }) {
   return (
@@ -225,6 +225,9 @@ export function CribstockCaseStudy() {
               <p className="text-muted-foreground text-base leading-relaxed">
                 Cribstock lets everyday Nigerians co-own properties and earn rental income from their phones. I joined to revamp what existed and introduce features that didn't. The result? A sell-out.
               </p>
+              <a href="https://cribstock.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mt-3 underline underline-offset-4">
+                View live product <ArrowUpRight size={14} weight="bold" />
+              </a>
             </header>
 
             {/* Quick Facts */}
@@ -322,7 +325,13 @@ export function CribstockCaseStudy() {
                 Buying a property share had too many steps, too much jargon, and not enough reassurance along the way. I stripped it back. I made the pricing concrete, the returns tangible, and the steps feel like something a person designed rather than a compliance checklist.
               </p>
 
-              <ImagePlaceholder label="[Purchase flow screens]" caption="2–3 sequential screens on mobile. A GIF showing the flow in motion is even better here." />
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <img src="/projects/Property purchase flow.png" alt="Property purchase flow screens" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">Property Purchase Flow</p>
+                  <p className="text-xs text-white/70">Key screens from the redesigned purchase journey</p>
+                </div>
+              </div>
 
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Drop-offs fell by 30% after the redesign shipped.
@@ -345,7 +354,13 @@ export function CribstockCaseStudy() {
                 For the first time, we were able to sell out our new property stock quicker and faster. The revamp brought a kind of urgency to investors — they needed to hurry so they didn't miss out.
               </PMQuote>
 
-              <ImagePlaceholder label="[Presale tracker — key screen]" caption="The most important visual in this case study. Show the live counter, progress bar, and remaining shares." />
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <img src="/projects/Presale tracker.png" alt="Presale tracker" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">Presale Tracker</p>
+                  <p className="text-xs text-white/70">Live counter, progress bar, and remaining shares</p>
+                </div>
+              </div>
 
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Properties started selling out 80% faster. That's not a conversion tweak. That's a behaviour change.
@@ -361,7 +376,13 @@ export function CribstockCaseStudy() {
                 If investors didn't know what was coming, they had no reason to stay ready. I designed a dedicated upcoming deals page showing future presales before they open, with the property details, deal valuation, and launch date visible. The goal was simple: let investors make up their mind before the clock starts. So when a presale drops, they're not deciding. They're acting.
               </p>
 
-              <ImagePlaceholder label="[Upcoming presales page]" caption="Full-page or above-the-fold screenshot. Deal cards, valuations, launch dates visible." />
+              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+                <img src="/projects/Upcoming presale.png" alt="Upcoming presales page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <p className="text-sm font-medium text-white/90">Upcoming Presales</p>
+                  <p className="text-xs text-white/70">Deal cards, valuations, and launch dates at a glance</p>
+                </div>
+              </div>
 
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 This contributed to the 50% increase in conversions. The decision was already made before the deal went live.
@@ -378,8 +399,30 @@ export function CribstockCaseStudy() {
               </p>
 
               <div className="my-6 space-y-6">
-                <ImagePlaceholder label="[Co-ownership page]" caption="Shareholding, valuation, exit timeline." />
-                <ImagePlaceholder label="[Rental detail page]" caption="Income rate, payout cadence, occupancy." />
+                <div className="relative rounded-lg overflow-hidden border border-border bg-secondary">
+                  <img src="/projects/Co-ownership.png" alt="Co-ownership page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex items-end justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-white/90">Co-ownership Page</p>
+                      <p className="text-xs text-white/70">Shareholding, valuation, exit timeline</p>
+                    </div>
+                    <a href="https://cribstock.com/" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold uppercase tracking-wider text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full transition-colors shrink-0 flex items-center gap-1.5">
+                      Visit live product <ArrowUpRight size={14} weight="bold" />
+                    </a>
+                  </div>
+                </div>
+                <div className="relative rounded-lg overflow-hidden border border-border bg-secondary">
+                  <img src="/projects/Rental deal.png" alt="Rental detail page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex items-end justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-white/90">Rental Detail Page</p>
+                      <p className="text-xs text-white/70">Income rate, payout cadence, occupancy</p>
+                    </div>
+                    <a href="https://cribstock.com/" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold uppercase tracking-wider text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full transition-colors shrink-0 flex items-center gap-1.5">
+                      Visit live product <ArrowUpRight size={14} weight="bold" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </section>
 

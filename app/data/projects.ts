@@ -28,7 +28,7 @@ export const projects: Project[] = [
     ]
   },
   {
-    title: "Health Tracker",
+    title: "Yobulu",
     description: "iOS/Android fitness tracking application",
     category: "Mobile App",
     year: "2025",
@@ -41,16 +41,13 @@ export const projects: Project[] = [
     ]
   },
   {
-    title: "Design System",
-    description: "Component library with 100+ components",
-    category: "Systems",
+    title: "Espee Marketplace",
+    description: "A scalable marketplace platform with 100+ reusable components ensuring consistency across products.",
+    category: "Marketplace",
     year: "2024",
     link: "#",
     screens: [
-      { src: "/projects/design-system/colors.png", caption: "Color System", type: "image" },
-      { src: "/projects/design-system/typography.png", caption: "Typography", type: "image" },
-      { src: "/projects/design-system/components.png", caption: "Components", type: "image" },
-      { src: "/projects/design-system/patterns.png", caption: "Patterns", type: "image" },
+      { src: "/projects/espee-market-card.png", caption: "Marketplace Overview", type: "image" },
     ]
   },
 ];

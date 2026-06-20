@@ -30,18 +30,20 @@ const portfolioData = {
   projects: [
     { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/Scene-1.png" },
     { name: "Cribstock", category: "Web App", description: "Real estate investment platform enabling everyday Nigerians to co-own properties and earn rental income from their phones.", slug: "cribstock", image: "/projects/cribstock-card.png" },
-    { name: "Health Tracker", category: "Mobile App", description: "A fitness tracking app that helps users monitor workouts, track progress, set goals, and analyze health metrics.", slug: null },
-    { name: "Design System", category: "Systems", description: "A scalable design system with 100+ reusable components ensuring consistency across products.", slug: null }
+    { name: "Yobulu", category: "Mobile App", description: "A unified financial ecosystem that gives users access to CFD markets, cryptocurrencies, stocks, P2P trading, event-based investments, and everyday banking services through a seamless experience.", slug: null, image: "/projects/yobulu-card.jpg" },
+    { name: "Espee Marketplace", category: "Marketplace", description: "A digital commerce platform that allows buyers to discover products, sellers to grow their businesses, and both parties to transact using Espees (SPS).", slug: null, image: "/projects/espee-market-card.png" }
   ],
   writing: [
-    { title: "How I approach design systems", date: "Jan 2026", url: "#" },
-    { title: "Lessons from shipping 10 products", date: "Dec 2025", url: "#" },
-    { title: "The future of UI design with AI", date: "Nov 2025", url: "#" }
+    { title: "Putting Ideas into Words", author: "Paul Graham", url: "https://paulgraham.com/words.html" },
+    { title: "How to Cultivate Taste in the Age of Algorithms", author: "Kyle Chayka", url: "https://behavioralscientist.org/how-to-cultivate-taste-in-the-age-of-algorithms/" },
+    { title: "How to Do Great Work", author: "Paul Graham", url: "https://paulgraham.com/greatwork.html" },
+    { title: "The Age of Average", author: "Alex Murrell", url: "https://www.alexmurrell.co.uk/articles/the-age-of-average" },
+    { title: "The Symbiotic Enterprise", author: "McKinsey", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-symbiotic-enterprise" }
   ],
   social: {
-    email: "hello@yourname.com",
-    twitter: "yourhandle",
-    linkedin: "yourname",
+    email: "michealovie33@gmail.com",
+    twitter: "im__ovie",
+    linkedin: "michaelovie",
     dribbble: "yourname"
   }
 };
@@ -208,7 +210,7 @@ export default function Portfolio() {
 
       {/* Featured */}
       <section className="mb-16">
-        <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Featured</h2>
+        <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Ideas in Motion — Personal Projects</h2>
         <div className="space-y-1">
           {portfolioData.featured.map((project, index) => (
             <motion.div
@@ -348,16 +350,18 @@ export default function Portfolio() {
 
       {/* Writing */}
       <section className="mb-16">
-        <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Writing</h2>
+        <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Interesting Reads</h2>
 <div className="space-y-1">
             {portfolioData.writing.map((article, index) => (
               <a
                 key={index}
                 href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
               >
               <span className="font-medium group-hover:text-primary transition-colors duration-150">{article.title}</span>
-              <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150">{article.date}</span>
+              <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150">{article.author || article.date}</span>
             </a>
           ))}
         </div>
@@ -375,13 +379,13 @@ export default function Portfolio() {
             <span>{portfolioData.social.email}</span>
           </a>
           <a 
-            href={`https://twitter.com/${portfolioData.social.twitter}`} 
+            href={`https://x.com/${portfolioData.social.twitter}`} 
             target="_blank" 
             rel="noopener"
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-150"
           >
             <TwitterLogo size={16} weight="bold" />
-            <span>twitter</span>
+            <span>x</span>
           </a>
           <a 
             href={`https://linkedin.com/in/${portfolioData.social.linkedin}`} 

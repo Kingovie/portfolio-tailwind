@@ -31,7 +31,7 @@ A product designer portfolio built with Next.js 15, Tailwind CSS, Framer Motion,
 - Rounded-lg corners on all interactive elements
 - Smooth transitions (300ms ease-out) on hover states
 - Company logo rotates 16° on hover
-- Featured and Writing sections with rounded-lg highlight on hover
+- Featured and Interesting Reads sections with rounded-lg highlight on hover
 - Framer Motion animations (page transitions, card reveals, slider transitions)
 
 ### Case Studies (`/work/[slug]`)
@@ -55,6 +55,24 @@ Both case studies are rich, dedicated components that share a consistent design 
 - **Before/after image slider**: Animated side-by-side comparison with left/right navigation arrows, carousel dot indicators, and gradient caption overlay. Desktop view (6000×4898px) and mobile view (6000×3908px) using AnimatePresence for smooth transitions
 - PM quotes, insight metrics (80% faster sell-outs, ₦500M+ managed, etc.), and key takeaways
 - Consistent spacing, typography, and color from the design system
+
+### Projects
+- **Yobulu**: Financial ecosystem (in development, coming soon)
+- **Espee Marketplace**: Digital commerce platform using Espees (SPS) (in development, coming soon)
+- Non-linkable projects show "Coming soon" overlay with reduced opacity on `/work` page
+
+### Interesting Reads
+Curated articles with external links that open in new tabs:
+- "Putting Ideas into Words" — Paul Graham
+- "How to Cultivate Taste in the Age of Algorithms" — Kyle Chayka
+- "How to Do Great Work" — Paul Graham
+- "The Age of Average" — Alex Murrell
+- "The Symbiotic Enterprise" — McKinsey
+
+### Connect
+- Email: michealovie33@gmail.com
+- X (Twitter): @im__ovie
+- LinkedIn: /in/michaelovie
 
 ## Stack
 
@@ -82,6 +100,7 @@ Edit `app/page.tsx` to update:
 - Featured projects
 - All projects with case studies
 - Social links
+- Interesting Reads articles
 - Project placeholder colors (in `placeholderColors` array)
 - Email address in the "Get in touch" button
 
@@ -118,10 +137,17 @@ portfolio-tailwind/
 │   │   ├── Before and after.png
 │   │   ├── Bringgood Academy.png
 │   │   ├── Buyers Flow - Onboarding.png
+│   │   ├── Co-ownership.png
+│   │   ├── espee-market-card.png
 │   │   ├── Mobile before and after.png
+│   │   ├── Presale tracker.png
+│   │   ├── Property purchase flow.png
+│   │   ├── Rental deal.png
 │   │   ├── Rider Flow - Onboarding.png
 │   │   ├── Sellers Flow - Onboarding.png
-│   │   └── ...
+│   │   ├── Upcoming presale.png
+│   │   ├── yobulu-card.jpg
+│   │   └── yobulu-card.png
 │   ├── bringgoods-original.html    # Original case study HTML (reference backup)
 │   ├── company-logo.jpg
 │   ├── company-logo.png
