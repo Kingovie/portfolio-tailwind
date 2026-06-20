@@ -361,7 +361,7 @@ export default function Portfolio() {
                 className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
               >
               <span className="font-medium group-hover:text-primary transition-colors duration-150">{article.title}</span>
-              <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150">{article.author || article.date}</span>
+              <span className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150">{article.author}</span>
             </a>
           ))}
         </div>
