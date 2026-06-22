@@ -214,7 +214,7 @@ export default function Portfolio() {
           </a>
           <a
             href="#"
-            className="group h-10 bg-foreground/[0.15] text-foreground/80 px-6 rounded-full relative overflow-hidden cursor-pointer active:scale-[0.97] transition-all"
+            className="group h-10 bg-muted-foreground/15 text-foreground/80 px-6 rounded-full relative overflow-hidden cursor-pointer active:scale-[0.97] transition-all"
           >
             <div className="h-[80px] flex flex-col items-center transition-transform duration-100 ease-out group-hover:-translate-y-1/2">
               <div className="flex items-center justify-center h-10 shrink-0 text-sm font-medium">
