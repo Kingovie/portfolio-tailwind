@@ -199,16 +199,41 @@ export default function Portfolio() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-12">
           <a
             href="mailto:michaelovie33@gmail.com?subject=Hey Michael"
-            className="h-10 bg-foreground text-background px-6 rounded-full shadow-lg inline-flex items-center justify-center gap-2 text-sm font-medium cursor-pointer hover:opacity-90 active:scale-[0.97] transition-all"
+            className="h-10 bg-foreground text-background px-6 rounded-full shadow-lg relative overflow-hidden cursor-pointer active:scale-[0.97] transition-all"
           >
-            <Envelope size={16} weight="fill" />
-            <span>Get in touch</span>
+            <motion.div
+              className="flex flex-col items-center justify-center"
+              style={{ height: '80px' }}
+              whileHover={{ y: -40 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+            >
+              <div className="flex items-center justify-center gap-2 h-10 shrink-0 text-sm font-medium">
+                <Envelope size={16} weight="fill" />
+                <span>Get in touch</span>
+              </div>
+              <div className="flex items-center justify-center gap-2 h-10 shrink-0 text-sm font-medium">
+                <Envelope size={16} weight="fill" />
+                <span>Get in touch</span>
+              </div>
+            </motion.div>
           </a>
           <a
             href="#"
-            className="h-10 bg-secondary text-foreground/60 px-6 rounded-full inline-flex items-center justify-center gap-2 text-sm font-medium cursor-pointer hover:text-foreground hover:bg-secondary/80 active:scale-[0.97] transition-all"
+            className="h-10 bg-secondary text-foreground/60 px-6 rounded-full relative overflow-hidden cursor-pointer active:scale-[0.97] transition-all"
           >
-            <span>Resume</span>
+            <motion.div
+              className="flex flex-col items-center justify-center"
+              style={{ height: '80px' }}
+              whileHover={{ y: -40 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+            >
+              <div className="flex items-center justify-center h-10 shrink-0 text-sm font-medium">
+                <span>Resume</span>
+              </div>
+              <div className="flex items-center justify-center h-10 shrink-0 text-sm font-medium">
+                <span>Resume</span>
+              </div>
+            </motion.div>
           </a>
         </div>
 
