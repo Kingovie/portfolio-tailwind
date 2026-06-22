@@ -196,7 +196,7 @@ export default function Portfolio() {
           </a>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-12">
+        <div className="flex flex-row items-center gap-3 mb-12">
           <a
             href="mailto:michaelovie33@gmail.com?subject=Hey Michael"
             className="group h-10 bg-foreground text-background px-6 rounded-full shadow-lg relative overflow-hidden cursor-pointer active:scale-[0.97] transition-all"
