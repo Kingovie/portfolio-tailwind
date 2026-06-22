@@ -206,7 +206,7 @@ export default function Portfolio() {
           </a>
           <a
             href="#"
-            className="h-10 bg-foreground/8 text-foreground/60 px-6 rounded-full inline-flex items-center justify-center gap-2 text-sm font-medium cursor-pointer hover:text-foreground hover:bg-foreground/12 active:scale-[0.97] transition-all"
+            className="h-10 bg-secondary text-foreground/60 px-6 rounded-full inline-flex items-center justify-center gap-2 text-sm font-medium cursor-pointer hover:text-foreground hover:bg-secondary/80 active:scale-[0.97] transition-all"
           >
             <span>Resume</span>
           </a>
