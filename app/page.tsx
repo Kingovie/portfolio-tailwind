@@ -196,17 +196,17 @@ export default function Portfolio() {
           </a>
         </div>
 
-        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-12">
           <a
             href="mailto:michaelovie33@gmail.com?subject=Hey Michael"
-            className="w-full md:w-[280px] h-24 bg-foreground text-background rounded-2xl shadow-lg inline-flex items-center justify-center gap-3 text-base font-medium cursor-pointer hover:opacity-90 active:scale-[0.97] transition-all"
+            className="h-10 bg-foreground text-background px-6 rounded-full shadow-lg inline-flex items-center justify-center gap-2 text-sm font-medium cursor-pointer hover:opacity-90 active:scale-[0.97] transition-all"
           >
-            <Envelope size={22} weight="fill" />
+            <Envelope size={16} weight="fill" />
             <span>Get in touch</span>
           </a>
           <a
             href="#"
-            className="w-full md:w-[280px] h-24 bg-secondary text-muted-foreground rounded-2xl inline-flex items-center justify-center gap-3 text-base font-medium cursor-pointer hover:text-foreground hover:bg-secondary/80 active:scale-[0.97] transition-all"
+            className="h-10 bg-secondary text-muted-foreground px-6 rounded-full inline-flex items-center justify-center gap-2 text-sm font-medium cursor-pointer hover:text-foreground hover:bg-secondary/80 active:scale-[0.97] transition-all"
           >
             <span>Resume</span>
           </a>
