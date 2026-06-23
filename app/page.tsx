@@ -25,7 +25,7 @@ const portfolioData = {
   },
   featured: [
     { name: "Startsmart", role: "Side Project", description: "Know if your business idea is worth starting.", url: "#" },
-    { name: "PropertyHub", role: "Side Project", description: "Find and compare properties across Nigeria without switching platforms.", url: "#" }
+    { name: "PropertyHub", role: "Side Project", description: "Find and compare properties across Nigeria without switching platforms.", url: "#", image: "/propertyhub-logo.png" }
   ],
   projects: [
     { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/Scene-1.png" },
@@ -240,8 +240,12 @@ export default function Portfolio() {
               href={project.url}
               className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg bg-secondary/50 hover:bg-secondary/80 transition-all duration-200 group"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-base sm:text-lg font-semibold text-muted-foreground">
-                {project.name[0]}
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-base sm:text-lg font-semibold text-muted-foreground overflow-hidden">
+                {project.image ? (
+                  <Image src={project.image} alt={project.name} width={48} height={48} className="object-cover w-full h-full" />
+                ) : (
+                  project.name[0]
+                )}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 flex-wrap">
