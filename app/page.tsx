@@ -242,7 +242,7 @@ export default function Portfolio() {
             >
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-base sm:text-lg font-semibold text-muted-foreground overflow-hidden">
                 {project.image ? (
-                  <Image src={project.image} alt={project.name} fill className="object-cover" sizes="48px" />
+                  <Image src={project.image} alt={project.name} fill className="object-cover" sizes="96px" quality={100} />
                 ) : (
                   project.name[0]
                 )}
