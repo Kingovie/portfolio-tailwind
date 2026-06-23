@@ -25,7 +25,7 @@ const portfolioData = {
   },
   featured: [
     { name: "Startsmart", role: "Side Project", description: "Flagship product redesign that improved user retention by 40%", url: "#" },
-    { name: "Project Two", role: "Side Project", description: "Design system used by 50+ engineers and designers", url: "#" }
+    { name: "PropertyHub", role: "Side Project", description: "Design system used by 50+ engineers and designers", url: "#" }
   ],
   projects: [
     { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/Scene-1.png" },
