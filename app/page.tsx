@@ -24,7 +24,7 @@ const portfolioData = {
     url: "#",
   },
   featured: [
-    { name: "Startsmart", role: "Side Project", description: "Know if your business idea is worth starting.", url: "#" },
+    { name: "Startsmart", role: "Side Project", description: "Know if your business idea is worth starting.", url: "#", image: "/startsmart-logo.png" },
     { name: "PropertyHub", role: "Side Project", description: "Find and compare properties across Nigeria without switching platforms.", url: "#", image: "/propertyhub-logo.png" }
   ],
   projects: [
