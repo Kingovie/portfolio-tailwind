@@ -240,9 +240,9 @@ export default function Portfolio() {
               href={project.url}
               className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border border-border hover:bg-secondary/50 transition-all duration-200 group"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-base sm:text-lg font-semibold text-muted-foreground overflow-hidden">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-base sm:text-lg font-semibold text-muted-foreground overflow-hidden">
                 {project.image ? (
-                  <Image src={project.image} alt={project.name} width={48} height={48} className="object-cover w-full h-full" />
+                  <Image src={project.image} alt={project.name} fill className="object-cover" sizes="48px" />
                 ) : (
                   project.name[0]
                 )}
