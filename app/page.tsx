@@ -18,7 +18,7 @@ const placeholderColors = [
 const portfolioData = {
   name: "Michael Ovie",
   role: "Product Designer",
-  bio: "Product Designer with 3 years of hands-on experience designing for fintech, e-commerce, and proptech companies. My work has reached 17,000+ users globally and helped accelerate product sales by 40%. I focus on user research and usability testing to inform my design decisions. I enjoy solving complex problems by breaking them down into simple, intuitive experiences that people actually want to use.",
+  bio: "Product Designer with 4+ years of experience designing digital products across fintech, e-commerce, and proptech. My work has reached over 17,000 users globally and contributed to a 40% increase in product sales. I focus on user research and usability testing to guide design decisions and create simple, effective user experiences.",
   currentRole: {
     company: "Bringgoods Engineering",
     url: "#",
@@ -180,7 +180,7 @@ export default function Portfolio() {
         <p className="text-muted-foreground mb-4">Product Designer</p>
 
         {/* Bio */}
-        <p className="text-foreground max-w-xl leading-relaxed mb-3">Product Designer with over 3 years of experience in fintech, e-commerce, and proptech. My designs have reached 17,000+ users and boosted product sales by 40%. I combine user research with usability testing to create simple, intuitive experiences that drive results.</p>
+        <p className="text-foreground max-w-xl leading-relaxed mb-3">{portfolioData.bio}</p>
 
         {/* Now section */}
         <div className="flex items-center gap-2 mt-4 mb-8">
