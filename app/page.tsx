@@ -238,7 +238,7 @@ export default function Portfolio() {
             <Link
               key={index}
               href={project.url}
-              className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg bg-secondary/50 hover:bg-secondary/80 transition-all duration-200 group"
+              className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border border-border hover:bg-secondary/50 transition-all duration-200 group"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-base sm:text-lg font-semibold text-muted-foreground overflow-hidden">
                 {project.image ? (
