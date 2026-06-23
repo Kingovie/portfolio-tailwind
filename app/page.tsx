@@ -213,7 +213,7 @@ export default function Portfolio() {
             </div>
           </a>
           <a
-            href="#"
+            href="https://drive.google.com/file/d/1r074gF9VtAJ1HgBFYJSX1mcQoQWoufmD/view"
             className="group h-10 bg-muted-foreground/15 text-foreground/80 px-6 rounded-full relative overflow-hidden cursor-pointer active:scale-[0.97] transition-all"
           >
             <div className="h-[80px] flex flex-col items-center transition-transform duration-100 ease-out group-hover:-translate-y-1/2">
