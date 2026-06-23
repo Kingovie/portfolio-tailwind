@@ -24,7 +24,7 @@ const portfolioData = {
     url: "#",
   },
   featured: [
-    { name: "Project One", role: "Side Project", description: "Flagship product redesign that improved user retention by 40%", url: "#" },
+    { name: "Startsmart", role: "Side Project", description: "Flagship product redesign that improved user retention by 40%", url: "#" },
     { name: "Project Two", role: "Side Project", description: "Design system used by 50+ engineers and designers", url: "#" }
   ],
   projects: [
