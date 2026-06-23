@@ -253,7 +253,7 @@ export default function Portfolio() {
               </div>
               <ArrowRight 
                 size={16} 
-                className="text-muted-foreground mt-1.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shrink-0" 
+                className="text-muted-foreground self-center opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shrink-0" 
               />
             </Link>
           ))}
