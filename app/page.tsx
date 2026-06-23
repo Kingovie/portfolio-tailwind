@@ -24,7 +24,7 @@ const portfolioData = {
     url: "#",
   },
   featured: [
-    { name: "Startsmart", role: "Side Project", description: "Flagship product redesign that improved user retention by 40%", url: "#" },
+    { name: "Startsmart", role: "Side Project", description: "Know if your business idea is worth starting.", url: "#" },
     { name: "PropertyHub", role: "Side Project", description: "Find and compare properties across Nigeria without switching platforms.", url: "#" }
   ],
   projects: [
