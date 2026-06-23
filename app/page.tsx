@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
-import { Moon, Sun, SpeakerHigh, SpeakerSlash, Envelope, TwitterLogo, LinkedinLogo, DribbbleLogo, ArrowRight, CaretRight, SquaresFour, Rows, SealCheck } from "@phosphor-icons/react";
+import { Moon, Sun, SpeakerHigh, SpeakerSlash, Envelope, TwitterLogo, LinkedinLogo, DribbbleLogo, ArrowRight, SquaresFour, Rows, SealCheck } from "@phosphor-icons/react";
 import { Tooltip } from "./components/Tooltip";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -24,8 +24,8 @@ const portfolioData = {
     url: "#",
   },
   featured: [
-    { name: "Project One", description: "Flagship product redesign that improved user retention by 40%", url: "#" },
-    { name: "Project Two", description: "Design system used by 50+ engineers and designers", url: "#" }
+    { name: "Project One", role: "Side Project", description: "Flagship product redesign that improved user retention by 40%", url: "#" },
+    { name: "Project Two", role: "Side Project", description: "Design system used by 50+ engineers and designers", url: "#" }
   ],
   projects: [
     { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/Scene-1.png" },
@@ -233,25 +233,29 @@ export default function Portfolio() {
       {/* Featured */}
       <section className="mb-16">
         <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Ideas in Motion — Personal Projects</h2>
-        <div className="space-y-1">
+        <div className="space-y-3">
           {portfolioData.featured.map((project, index) => (
-            <motion.div
+            <Link
               key={index}
-              whileHover={{ x: 4 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              href={project.url}
+              className="flex items-start gap-4 p-4 rounded-2xl border border-border hover:border-muted-foreground/20 hover:bg-secondary/50 transition-all duration-200 group"
             >
-              <Link
-                href={project.url}
-                className="grid grid-cols-[auto_1fr_auto] items-center gap-3 py-3 md:py-2 group cursor-pointer rounded-lg -mx-3 px-3 transition-colors duration-150 hover:bg-secondary/50"
-              >
-                <span className="font-medium group-hover:text-primary transition-colors duration-150">{project.name}</span>
-                <span className="text-muted-foreground text-sm text-right leading-snug group-hover:text-foreground transition-colors duration-150">{project.description}</span>
-                <CaretRight 
-                  size={14} 
-                  className="text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" 
-                />
-              </Link>
-            </motion.div>
+              <div className="w-12 h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-lg font-semibold text-muted-foreground">
+                {project.name[0]}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="font-semibold text-foreground">{project.name}</span>
+                  <span className="text-muted-foreground/40">·</span>
+                  <span className="text-sm text-muted-foreground">{project.role}</span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-0.5">{project.description}</p>
+              </div>
+              <ArrowRight 
+                size={16} 
+                className="text-muted-foreground mt-1.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shrink-0" 
+              />
+            </Link>
           ))}
         </div>
       </section>
