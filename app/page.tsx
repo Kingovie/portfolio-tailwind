@@ -233,23 +233,23 @@ export default function Portfolio() {
       {/* Featured */}
       <section className="mb-16">
         <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Ideas in Motion — Personal Projects</h2>
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
           {portfolioData.featured.map((project, index) => (
             <Link
               key={index}
               href={project.url}
-              className="flex items-start gap-4 p-4 rounded-2xl border border-border hover:border-muted-foreground/20 hover:bg-secondary/50 transition-all duration-200 group"
+              className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl border border-border hover:border-muted-foreground/20 hover:bg-secondary/50 transition-all duration-200 group"
             >
-              <div className="w-12 h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-lg font-semibold text-muted-foreground">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-base sm:text-lg font-semibold text-muted-foreground">
                 {project.name[0]}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="font-semibold text-foreground">{project.name}</span>
+                  <span className="text-sm sm:text-base font-semibold text-foreground">{project.name}</span>
                   <span className="text-muted-foreground/40">·</span>
-                  <span className="text-sm text-muted-foreground">{project.role}</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground">{project.role}</span>
                 </div>
-                <p className="text-sm text-muted-foreground mt-0.5">{project.description}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">{project.description}</p>
               </div>
               <ArrowRight 
                 size={16} 
