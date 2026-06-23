@@ -127,7 +127,7 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-12 md:py-20">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12 md:py-20">
       {/* Header */}
       <header className="mb-16">
         {/* Profile Image */}
