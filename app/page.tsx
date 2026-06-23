@@ -214,7 +214,8 @@ export default function Portfolio() {
           </a>
           <a
             href="https://drive.google.com/file/d/1r074gF9VtAJ1HgBFYJSX1mcQoQWoufmD/view"
-            className="group h-10 bg-muted-foreground/15 text-foreground/80 px-6 rounded-full relative overflow-hidden cursor-pointer active:scale-[0.97] transition-all"
+            target="_blank" rel="noopener noreferrer"
+          className="group h-10 bg-muted-foreground/15 text-foreground/80 px-6 rounded-full relative overflow-hidden cursor-pointer active:scale-[0.97] transition-all"
           >
             <div className="h-[80px] flex flex-col items-center transition-transform duration-100 ease-out group-hover:-translate-y-1/2">
               <div className="flex items-center justify-center h-10 shrink-0 text-sm font-medium">
@@ -276,13 +277,13 @@ export default function Portfolio() {
         </div>
 
         {viewMode === 'list' ? (
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6 sm:gap-8">
             {portfolioData.projects.map((project, index) => {
               const card = (
                 <motion.div
                   whileHover={{ y: -6, scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="relative bg-card border border-border rounded-xl p-5 transition-colors duration-200 hover:bg-secondary/50 hover:border-muted-foreground/20 group"
+                  className="relative bg-card border border-border rounded-xl p-4 sm:p-5 transition-colors duration-200 hover:bg-secondary/50 hover:border-muted-foreground/20 group"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -313,7 +314,7 @@ export default function Portfolio() {
 
                   <hr className="border-border my-6" />
 
-                  <div className={`relative w-full aspect-[4/3] max-h-[300px] rounded-lg overflow-hidden ${project.image ? '' : placeholderColors[index % placeholderColors.length]}`}>
+                  <div className={`relative w-full aspect-[3/2] sm:aspect-[4/3] max-h-[200px] sm:max-h-[300px] rounded-lg overflow-hidden ${project.image ? '' : placeholderColors[index % placeholderColors.length]}`}>
                     {project.image && (
                       <Image src={project.image} alt={project.name} fill className="object-cover" />
                     )}
@@ -342,7 +343,7 @@ export default function Portfolio() {
             })}
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {portfolioData.projects.map((project, index) => (
               <Link
                 key={index}
