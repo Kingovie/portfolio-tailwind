@@ -143,7 +143,7 @@ export default function Portfolio() {
         <div className="flex justify-between items-center mb-0">
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-semibold text-foreground">{portfolioData.name}</h1>
-            <SealCheck size={20} weight="fill" className="text-[#1EB8F9]" />
+            <SealCheck size={16} weight="fill" className="text-[#1EB8F9]" />
           </div>
           {mounted && (
             <div className="flex items-center gap-1">
@@ -152,7 +152,7 @@ export default function Portfolio() {
                 className="p-2 hover:bg-secondary rounded-lg transition-colors duration-150"
                 aria-label="View work"
               >
-                <SquaresFour size={18} weight="bold" />
+                <SquaresFour size={16} weight="bold" />
               </a>
               <Tooltip content={soundMuted ? "Unmute sound" : "Mute sound"}>
                 <button
@@ -160,7 +160,7 @@ export default function Portfolio() {
                   className="p-2 hover:bg-secondary rounded-lg transition-colors duration-150"
                   aria-label={soundMuted ? "Unmute sound" : "Mute sound"}
                 >
-                  {soundMuted ? <SpeakerSlash size={18} weight="bold" /> : <SpeakerHigh size={18} weight="bold" />}
+                  {soundMuted ? <SpeakerSlash size={16} weight="bold" /> : <SpeakerHigh size={16} weight="bold" />}
                 </button>
               </Tooltip>
               <Tooltip content={darkMode ? "Light mode" : "Dark mode"}>
@@ -169,7 +169,7 @@ export default function Portfolio() {
                   className="p-2 hover:bg-secondary rounded-lg transition-colors duration-150"
                   aria-label="Toggle dark mode"
                 >
-                  {darkMode ? <Sun size={18} weight="bold" /> : <Moon size={18} weight="bold" />}
+                  {darkMode ? <Sun size={16} weight="bold" /> : <Moon size={16} weight="bold" />}
                 </button>
               </Tooltip>
             </div>
@@ -203,11 +203,11 @@ export default function Portfolio() {
           >
             <div className="h-[80px] flex flex-col items-center transition-transform duration-100 ease-out group-hover:-translate-y-1/2">
               <div className="flex items-center justify-center gap-2 h-10 shrink-0 text-sm font-medium">
-                <Envelope size={16} weight="fill" />
+                <Envelope size={14} weight="fill" />
                 <span>Get in touch</span>
               </div>
               <div className="flex items-center justify-center gap-2 h-10 shrink-0 text-sm font-medium">
-                <Envelope size={16} weight="fill" />
+                <Envelope size={14} weight="fill" />
                 <span>Get in touch</span>
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function Portfolio() {
                 <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">{project.description}</p>
               </div>
               <ArrowRight 
-                size={16} 
+                size={14} 
                 className="text-muted-foreground self-center opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shrink-0" 
               />
             </Link>
@@ -269,13 +269,13 @@ export default function Portfolio() {
               onClick={() => setViewMode('list')}
               className={`p-1.5 rounded-md transition-colors ${viewMode === 'list' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
             >
-              <Rows size={16} weight="bold" />
+              <Rows size={14} weight="bold" />
             </button>
             <button
               onClick={() => setViewMode('grid')}
               className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
             >
-              <SquaresFour size={16} weight="bold" />
+              <SquaresFour size={14} weight="bold" />
             </button>
           </div>
         </div>
@@ -402,7 +402,7 @@ export default function Portfolio() {
             href={`mailto:${portfolioData.social.email}`} 
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-150"
           >
-            <Envelope size={16} weight="bold" />
+            <Envelope size={14} weight="bold" />
             <span>{portfolioData.social.email}</span>
           </a>
           <a 
@@ -411,7 +411,7 @@ export default function Portfolio() {
             rel="noopener"
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-150"
           >
-            <TwitterLogo size={16} weight="bold" />
+            <TwitterLogo size={14} weight="bold" />
             <span>x</span>
           </a>
           <a 
@@ -420,7 +420,7 @@ export default function Portfolio() {
             rel="noopener"
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-150"
           >
-            <LinkedinLogo size={16} weight="bold" />
+            <LinkedinLogo size={14} weight="bold" />
             <span>linkedin</span>
           </a>
         </div>
