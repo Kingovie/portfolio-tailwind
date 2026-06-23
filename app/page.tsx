@@ -233,7 +233,7 @@ export default function Portfolio() {
       {/* Featured */}
       <section className="mb-16">
         <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Ideas in Motion — Personal Projects</h2>
-        <div className="space-y-2 sm:space-y-3">
+        <div className="space-y-3 sm:space-y-4">
           {portfolioData.featured.map((project, index) => (
             <Link
               key={index}
