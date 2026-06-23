@@ -257,7 +257,7 @@ export default function Portfolio() {
               </div>
               <ArrowRight 
                 size={14} 
-                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200" 
+                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-muted-foreground opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200" 
               />
             </Link>
           ))}
