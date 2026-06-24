@@ -143,7 +143,12 @@ export default function Portfolio() {
         <div className="flex justify-between items-center mb-0">
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-semibold text-foreground">{portfolioData.name}</h1>
-            <SealCheck size={16} weight="fill" className="text-[#1EB8F9]" />
+                        <motion.div
+              animate={{ scale: [1, 1.12, 1], opacity: [1, 0.8, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <SealCheck size={16} weight="fill" className="text-[#1EB8F9]" />
+            </motion.div>
           </div>
           {mounted && (
             <div className="flex items-center gap-1">
