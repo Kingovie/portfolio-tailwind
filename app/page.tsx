@@ -25,7 +25,7 @@ const portfolioData = {
   },
   featured: [
     { name: "Startsmart", role: "Side Project", description: "Know if your business idea is worth starting.", url: "/coming-soon?project=Startsmart&image=/startsmart-logo.png", image: "/startsmart-logo.png" },
-    { name: "PropertyHub", role: "Side Project", description: "Find and compare properties across Nigeria without switching platforms.", url: "/coming-soon?project=PropertyHub&image=/propertyhub-logo.png", image: "/propertyhub-logo.png" }
+    { name: "PropLens", role: "Side Project", description: "Find and compare properties across Nigeria without switching platforms.", url: "/coming-soon?project=PropertyHub&image=/propertyhub-logo.png", image: "/propertyhub-logo.png" }
   ],
   projects: [
     { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/Scene-1.png" },
