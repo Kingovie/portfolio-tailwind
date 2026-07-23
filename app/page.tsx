@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 import { Moon, Sun, SpeakerHigh, SpeakerSlash, Envelope, TwitterLogo, LinkedinLogo, DribbbleLogo, ArrowRight, SquaresFour, Rows, SealCheck } from "@phosphor-icons/react";
 import { Tooltip } from "./components/Tooltip";
 import { HeatmapGrid } from "./components/HeatmapGrid";
+import { playBloomSound, playWhisperSound } from "./hooks/useClickSound";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -103,6 +104,29 @@ export default function Portfolio() {
   const [soundMuted, setSoundMuted] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  const handleBloomHover = useCallback(() => {
+    if (soundMuted) return;
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext();
+    }
+    if (audioCtxRef.current.state === 'suspended') {
+      audioCtxRef.current.resume();
+    }
+    playBloomSound(audioCtxRef.current);
+  }, [soundMuted]);
+
+  const handleWhisperHover = useCallback(() => {
+    if (soundMuted) return;
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext();
+    }
+    if (audioCtxRef.current.state === 'suspended') {
+      audioCtxRef.current.resume();
+    }
+    playWhisperSound(audioCtxRef.current);
+  }, [soundMuted]);
 
   useEffect(() => {
     if (darkMode) {
@@ -248,6 +272,7 @@ export default function Portfolio() {
               key={index}
               href={project.url}
               className="relative flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border border-border hover:bg-secondary/50 transition-all duration-200 group"
+              onMouseEnter={handleWhisperHover}
             >
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary shrink-0 flex items-center justify-center text-base sm:text-lg font-semibold text-muted-foreground overflow-hidden">
                 {project.image ? (
@@ -300,6 +325,7 @@ export default function Portfolio() {
                 <motion.div
                   whileHover={{ y: -6, scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  onMouseEnter={handleBloomHover}
                   className="relative bg-card border border-border rounded-xl p-4 sm:p-5 transition-colors duration-200 hover:bg-secondary/50 hover:border-muted-foreground/20 group"
                 >
                   <div className="flex items-start justify-between gap-4">
@@ -366,6 +392,7 @@ export default function Portfolio() {
                 key={index}
                 href={project.slug ? `/work/${project.slug}` : '#'}
                 className="group block transition-transform duration-200"
+                onMouseEnter={handleBloomHover}
               >
                 <div className={`relative aspect-video rounded-lg mb-4 overflow-hidden transition-all duration-200 ${project.image ? '' : placeholderColors[index % placeholderColors.length]}`}>
                   {project.image && (
@@ -399,6 +426,7 @@ export default function Portfolio() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
+                onMouseEnter={handleWhisperHover}
               >
               <span className="font-medium group-hover:text-primary transition-colors duration-150 truncate min-w-0">{article.title}</span>
               <span className="shrink-0 text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150 ml-4">{article.author}</span>

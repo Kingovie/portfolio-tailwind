@@ -1,9 +1,11 @@
 'use client';
 
+import { useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Calendar } from '@phosphor-icons/react';
+import { playBloomSound } from '../hooks/useClickSound';
 
 const projects = [
   {
@@ -49,6 +51,18 @@ const projects = [
 ];
 
 export default function WorkPage() {
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  const handleBloomHover = useCallback(() => {
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext();
+    }
+    if (audioCtxRef.current.state === 'suspended') {
+      audioCtxRef.current.resume();
+    }
+    playBloomSound(audioCtxRef.current);
+  }, []);
+
   return (
     <div className="min-h-screen">
       <div className="max-w-2xl mx-auto px-6 pt-20 pb-20">
@@ -72,6 +86,7 @@ export default function WorkPage() {
               key={project.slug}
               whileHover={{ y: -4, scale: 1.01 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              onMouseEnter={handleBloomHover}
             >
               {project.linkable ? (
                 <Link
