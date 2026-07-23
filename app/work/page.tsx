@@ -54,22 +54,21 @@ export default function WorkPage() {
   const audioCtxRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
-    function initAudio() {
-      if (!audioCtxRef.current) {
-        audioCtxRef.current = new AudioContext();
-      }
-      if (audioCtxRef.current.state === 'suspended') {
-        audioCtxRef.current.resume();
-      }
+    audioCtxRef.current = new AudioContext();
+  }, []);
+
+  const ensureAudio = useCallback(() => {
+    if (!audioCtxRef.current) return false;
+    if (audioCtxRef.current.state === 'suspended') {
+      audioCtxRef.current.resume();
     }
-    document.addEventListener('pointerdown', initAudio, { once: true });
-    return () => document.removeEventListener('pointerdown', initAudio);
+    return audioCtxRef.current.state === 'running';
   }, []);
 
   const handleBloomHover = useCallback(() => {
-    if (!audioCtxRef.current) return;
-    playBloomSound(audioCtxRef.current);
-  }, []);
+    if (!ensureAudio()) return;
+    playBloomSound(audioCtxRef.current!);
+  }, [ensureAudio]);
 
   return (
     <div className="min-h-screen">

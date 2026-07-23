@@ -107,27 +107,26 @@ export default function Portfolio() {
   const audioCtxRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
-    function initAudio() {
-      if (!audioCtxRef.current) {
-        audioCtxRef.current = new AudioContext();
-      }
-      if (audioCtxRef.current.state === 'suspended') {
-        audioCtxRef.current.resume();
-      }
+    audioCtxRef.current = new AudioContext();
+  }, []);
+
+  const ensureAudio = useCallback(() => {
+    if (!audioCtxRef.current) return false;
+    if (audioCtxRef.current.state === 'suspended') {
+      audioCtxRef.current.resume();
     }
-    document.addEventListener('pointerdown', initAudio, { once: true });
-    return () => document.removeEventListener('pointerdown', initAudio);
+    return audioCtxRef.current.state === 'running';
   }, []);
 
   const handleBloomHover = useCallback(() => {
-    if (soundMuted || !audioCtxRef.current) return;
-    playBloomSound(audioCtxRef.current);
-  }, [soundMuted]);
+    if (soundMuted || !ensureAudio()) return;
+    playBloomSound(audioCtxRef.current!);
+  }, [soundMuted, ensureAudio]);
 
   const handleWhisperHover = useCallback(() => {
-    if (soundMuted || !audioCtxRef.current) return;
-    playWhisperSound(audioCtxRef.current);
-  }, [soundMuted]);
+    if (soundMuted || !ensureAudio()) return;
+    playWhisperSound(audioCtxRef.current!);
+  }, [soundMuted, ensureAudio]);
 
   useEffect(() => {
     if (darkMode) {
