@@ -176,3 +176,22 @@ html {
   box-shadow: 0 4px 12px hsl(var(--foreground) / 0.1);
   transition: box-shadow 0.2s ease;
 }
+
+/* Heatmap Grid */
+.heatmap-cell {
+  border-radius: 2px;
+  width: 10px;
+  height: 10px;
+  transition: background-color 0.3s;
+}
+.level-0 { background-color: hsl(var(--border)); }
+.level-1 { background-color: hsl(var(--muted-foreground) / 0.2); }
+.level-2 { background-color: hsl(var(--muted-foreground) / 0.4); }
+.level-3 { background-color: hsl(var(--muted-foreground) / 0.7); }
+
+@keyframes heatmap-pulse {
+  0%, 100% { background-color: hsl(var(--border)); }
+  25% { background-color: hsl(var(--muted-foreground) / 0.2); }
+  50% { background-color: hsl(var(--muted-foreground) / 0.5); }
+  75% { background-color: hsl(var(--muted-foreground) / 0.3); }
+}
