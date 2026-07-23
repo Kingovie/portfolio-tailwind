@@ -36,11 +36,11 @@ const portfolioData = {
     { name: "Espee Marketplace", category: "Marketplace", description: "A digital commerce platform that allows buyers to discover products, sellers to grow their businesses, and both parties to transact using Espees (SPS).", slug: null, image: "/projects/espee-market-card.png" }
   ],
   writing: [
-    { title: "Putting Ideas into Words", author: "Paul Graham", url: "https://paulgraham.com/words.html" },
-    { title: "How to Cultivate Taste in the Age of Algorithms", author: "Kyle Chayka", url: "https://behavioralscientist.org/how-to-cultivate-taste-in-the-age-of-algorithms/" },
-    { title: "How to Do Great Work", author: "Paul Graham", url: "https://paulgraham.com/greatwork.html" },
-    { title: "The Age of Average", author: "Alex Murrell", url: "https://www.alexmurrell.co.uk/articles/the-age-of-average" },
-    { title: "The Symbiotic Enterprise", author: "McKinsey", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-symbiotic-enterprise" }
+    { title: "Putting Ideas into Words", author: "Paul Graham", url: "https://paulgraham.com/words.html", image: "/articles/paul-graham-words.png" },
+    { title: "How to Cultivate Taste in the Age of Algorithms", author: "Kyle Chayka", url: "https://behavioralscientist.org/how-to-cultivate-taste-in-the-age-of-algorithms/", image: "/articles/cultivate-taste.png" },
+    { title: "How to Do Great Work", author: "Paul Graham", url: "https://paulgraham.com/greatwork.html", image: "/articles/paul-graham-greatwork.png" },
+    { title: "The Age of Average", author: "Alex Murrell", url: "https://www.alexmurrell.co.uk/articles/the-age-of-average", image: "/articles/age-of-average.png" },
+    { title: "The Symbiotic Enterprise", author: "McKinsey", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-symbiotic-enterprise", image: "/articles/symbiotic-enterprise.png" }
   ],
   social: {
     email: "michealovie33@gmail.com",
@@ -104,6 +104,8 @@ export default function Portfolio() {
   const [soundMuted, setSoundMuted] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [hoveredArticle, setHoveredArticle] = useState<number | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const audioCtxRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
@@ -418,21 +420,73 @@ export default function Portfolio() {
       {/* Writing */}
       <section className="mb-16">
         <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-6">Interesting Reads</h2>
-<div className="space-y-1">
+        <div className="space-y-1">
             {portfolioData.writing.map((article, index) => (
               <a
                 key={index}
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
-                onMouseEnter={handleWhisperHover}
+                className="relative flex items-center justify-between py-3 group cursor-pointer hover-lift transition-all duration-200 rounded-lg -mx-3 px-3 hover:bg-secondary/50"
+                onMouseEnter={(e) => {
+                  handleWhisperHover();
+                  setHoveredArticle(index);
+                  setMousePos({ x: e.clientX, y: e.clientY });
+                }}
+                onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+                onMouseLeave={() => setHoveredArticle(null)}
               >
               <span className="font-medium group-hover:text-primary transition-colors duration-150 truncate min-w-0">{article.title}</span>
               <span className="shrink-0 text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-150 ml-4">{article.author}</span>
             </a>
           ))}
         </div>
+
+        {/* Hover image card */}
+        {hoveredArticle !== null && (
+          <div
+            className="fixed z-50 pointer-events-none overflow-hidden"
+            style={{
+              left: mousePos.x + 16,
+              top: mousePos.y - 60,
+              width: 120,
+              height: 120,
+              borderRadius: 16,
+              boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+              opacity: 1,
+              transform: 'scale(1) rotate(-2deg)',
+              transition: 'opacity 0.2s ease, transform 0.2s ease',
+            }}
+          >
+            {portfolioData.writing[hoveredArticle].image ? (
+              <img
+                src={portfolioData.writing[hoveredArticle].image}
+                alt={portfolioData.writing[hoveredArticle].title}
+                className="w-full h-full object-cover"
+                style={{ filter: 'contrast(1.05) saturate(1.1)' }}
+              />
+            ) : (
+              <div
+                className="w-full h-full flex items-center justify-center p-3"
+                style={{
+                  background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+                }}
+              >
+                <span className="text-white text-[10px] font-medium leading-tight text-center line-clamp-4">
+                  {portfolioData.writing[hoveredArticle].title}
+                </span>
+              </div>
+            )}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: portfolioData.writing[hoveredArticle].image
+                  ? 'linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%)'
+                  : 'none',
+              }}
+            />
+          </div>
+        )}
       </section>
 
       {/* Connect */}
