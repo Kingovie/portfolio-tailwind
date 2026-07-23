@@ -106,25 +106,26 @@ export default function Portfolio() {
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const audioCtxRef = useRef<AudioContext | null>(null);
 
+  useEffect(() => {
+    function initAudio() {
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new AudioContext();
+      }
+      if (audioCtxRef.current.state === 'suspended') {
+        audioCtxRef.current.resume();
+      }
+    }
+    document.addEventListener('click', initAudio, { once: true });
+    return () => document.removeEventListener('click', initAudio);
+  }, []);
+
   const handleBloomHover = useCallback(() => {
-    if (soundMuted) return;
-    if (!audioCtxRef.current) {
-      audioCtxRef.current = new AudioContext();
-    }
-    if (audioCtxRef.current.state === 'suspended') {
-      audioCtxRef.current.resume();
-    }
+    if (soundMuted || !audioCtxRef.current) return;
     playBloomSound(audioCtxRef.current);
   }, [soundMuted]);
 
   const handleWhisperHover = useCallback(() => {
-    if (soundMuted) return;
-    if (!audioCtxRef.current) {
-      audioCtxRef.current = new AudioContext();
-    }
-    if (audioCtxRef.current.state === 'suspended') {
-      audioCtxRef.current.resume();
-    }
+    if (soundMuted || !audioCtxRef.current) return;
     playWhisperSound(audioCtxRef.current);
   }, [soundMuted]);
 
