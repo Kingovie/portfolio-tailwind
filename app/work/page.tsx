@@ -62,8 +62,8 @@ export default function WorkPage() {
         audioCtxRef.current.resume();
       }
     }
-    document.addEventListener('click', initAudio, { once: true });
-    return () => document.removeEventListener('click', initAudio);
+    document.addEventListener('pointerdown', initAudio, { once: true });
+    return () => document.removeEventListener('pointerdown', initAudio);
   }, []);
 
   const handleBloomHover = useCallback(() => {
