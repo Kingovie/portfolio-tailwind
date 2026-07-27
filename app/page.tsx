@@ -154,7 +154,7 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-0 pb-12 md:pb-20">
       {/* Heatmap */}
       <HeatmapGrid />
 
