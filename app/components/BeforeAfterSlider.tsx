@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useCallback, useRef, useState } from 'react';
+import Image from 'next/image';
 import { ArrowsLeftRight, CaretLeft, CaretRight } from '@phosphor-icons/react';
 
 interface BeforeAfterSliderProps {
@@ -88,21 +89,25 @@ export function BeforeAfterSlider({
       onClick={() => onImageClick?.(showingBefore ? beforeSrc : afterSrc, showingBefore ? beforeAlt : afterAlt)}
     >
       {/* after — full underlying layer */}
-      <img
+      <Image
         src={afterSrc}
         alt={afterAlt}
-        className="absolute inset-0 w-full h-full object-contain object-top pointer-events-none select-none"
-        draggable="false"
+        fill
+        className="object-contain object-top pointer-events-none select-none"
+        sizes="(min-width: 1024px) 672px, 100vw"
+        draggable={false}
         onContextMenu={(e) => e.preventDefault()}
       />
 
       {/* before — clipped to slider position; opaque bg so the after layer can't bleed through the gap left by object-contain */}
       <div className="absolute inset-0 overflow-hidden bg-white" style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }}>
-        <img
+        <Image
           src={beforeSrc}
           alt={beforeAlt}
-          className="absolute inset-0 w-full h-full object-contain object-top pointer-events-none select-none"
-          draggable="false"
+          fill
+          className="object-contain object-top pointer-events-none select-none"
+          sizes="(min-width: 1024px) 672px, 100vw"
+          draggable={false}
           onContextMenu={(e) => e.preventDefault()}
         />
       </div>

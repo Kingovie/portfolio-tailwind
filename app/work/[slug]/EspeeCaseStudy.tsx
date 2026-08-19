@@ -36,7 +36,14 @@ function ImagePlaceholder({ label, caption }: { label: string; caption?: string 
   );
 }
 
-function ImageLightbox({ image, onClose }: { image: { src: string; alt: string } | null; onClose: () => void }) {
+interface LightboxImage {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+
+function ImageLightbox({ image, onClose }: { image: LightboxImage | null; onClose: () => void }) {
   if (!image) return null;
   return (
     <div
@@ -57,11 +64,14 @@ function ImageLightbox({ image, onClose }: { image: { src: string; alt: string }
         className="flex flex-col items-center max-w-[92vw] max-h-[92vh] bg-neutral-50 rounded-2xl shadow-2xl p-4 cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          src={image?.src}
-          alt={image?.alt}
-          className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
-          draggable="false"
+        <Image
+          src={image.src}
+          alt={image.alt}
+          width={image.width ?? 1600}
+          height={image.height ?? 1150}
+          className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-lg select-none"
+          sizes="92vw"
+          draggable={false}
           onContextMenu={(e) => e.preventDefault()}
         />
         <p className="mt-3 text-center text-sm font-medium text-neutral-700">{image?.alt}</p>
@@ -75,7 +85,7 @@ function ImageLightbox({ image, onClose }: { image: { src: string; alt: string }
 // treatment used elsewhere on the site, just without step numbering.
 // Same treatment as the Cribstock purchase flow: each screen gets its own
 // full-width row, shown whole at its natural aspect — never cropped.
-function ScreenGrid({ items, onSelect }: { items: ScreenShot[]; onSelect: (image: { src: string; alt: string }) => void }) {
+function ScreenGrid({ items, onSelect }: { items: ScreenShot[]; onSelect: (image: LightboxImage) => void }) {
   return (
     <div className="my-8">
       {items.map((item) =>
@@ -83,14 +93,17 @@ function ScreenGrid({ items, onSelect }: { items: ScreenShot[]; onSelect: (image
           <div
             key={item.title}
             className="relative rounded-lg overflow-hidden border border-border my-6 bg-secondary cursor-zoom-in"
-            onClick={() => onSelect({ src: item.src as string, alt: item.title })}
+            onClick={() => onSelect({ src: item.src as string, alt: item.title, width: item.width, height: item.height })}
           >
-            <img
+            <Image
               src={item.src}
               alt={item.title}
+              width={item.width ?? 1600}
+              height={item.height ?? 1150}
               className="w-full h-auto select-none"
+              sizes="(min-width: 1024px) 672px, 100vw"
               loading="lazy"
-              draggable="false"
+              draggable={false}
               onContextMenu={(e) => e.preventDefault()}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
@@ -186,7 +199,7 @@ function CTASection() {
 
 export function EspeeCaseStudy() {
   const [activeHeading, setActiveHeading] = useState('');
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

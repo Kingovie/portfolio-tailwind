@@ -1,12 +1,20 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Envelope, X } from '@phosphor-icons/react';
 import { groups, type Screen } from '../../data/yobulu-screens';
 
-function ImageLightbox({ image, onClose }: { image: { src: string; alt: string } | null; onClose: () => void }) {
+interface LightboxImage {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+
+function ImageLightbox({ image, onClose }: { image: LightboxImage | null; onClose: () => void }) {
   if (!image) return null;
   return (
     <div
@@ -27,11 +35,14 @@ function ImageLightbox({ image, onClose }: { image: { src: string; alt: string }
         className="flex flex-col items-center max-w-[92vw] max-h-[92vh] bg-neutral-50 rounded-2xl shadow-2xl p-4 cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
+        <Image
           src={image.src}
           alt={image.alt}
-          className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
-          draggable="false"
+          width={image.width ?? 1600}
+          height={image.height ?? 1150}
+          className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-lg select-none"
+          sizes="92vw"
+          draggable={false}
           onContextMenu={(e) => e.preventDefault()}
         />
         <p className="mt-3 text-center text-sm font-medium text-neutral-700">{image.alt}</p>
@@ -45,21 +56,23 @@ function ImageLightbox({ image, onClose }: { image: { src: string; alt: string }
  * padded panel rather than bleeding to the edges, with its caption centered
  * underneath instead of laid over the image. Two per row.
  */
-function Surface({ item, onSelect }: { item: Screen; onSelect: (image: { src: string; alt: string }) => void }) {
+function Surface({ item, onSelect }: { item: Screen; onSelect: (image: LightboxImage) => void }) {
   return (
     <figure>
       {item.src ? (
         <div
-          className="rounded-lg border border-border bg-secondary p-4 flex items-center justify-center overflow-hidden cursor-zoom-in"
+          className="relative rounded-lg border border-border bg-secondary p-4 flex items-center justify-center overflow-hidden cursor-zoom-in"
           style={{ aspectRatio: '4 / 3' }}
-          onClick={() => onSelect({ src: item.src as string, alt: item.title })}
+          onClick={() => onSelect({ src: item.src as string, alt: item.title, width: item.width, height: item.height })}
         >
-          <img
+          <Image
             src={item.src}
             alt={item.title}
-            className="max-w-full max-h-full object-contain select-none"
+            fill
+            className="object-contain select-none"
+            sizes="(min-width: 1024px) 320px, 45vw"
             loading="lazy"
-            draggable="false"
+            draggable={false}
             onContextMenu={(e) => e.preventDefault()}
           />
         </div>
@@ -125,7 +138,7 @@ function CTASection() {
 
 export function YobuluCaseStudy() {
   const [activeHeading, setActiveHeading] = useState('');
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

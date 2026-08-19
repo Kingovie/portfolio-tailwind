@@ -20,10 +20,17 @@ function FeatureCard({ title, children, tag }: { title: string; children: React.
   );
 }
 
-function FlowStep({ title, caption, src, alt, onClick }: { title: string; caption: string; src: string; alt: string; onClick: () => void }) {
+interface LightboxImage {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+
+function FlowStep({ title, caption, src, alt, width, height, onClick }: { title: string; caption: string; src: string; alt: string; width: number; height: number; onClick: () => void }) {
   return (
     <div className="relative rounded-lg overflow-hidden border border-border my-6 bg-secondary cursor-zoom-in" onClick={onClick}>
-      <img src={src} alt={alt} className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+      <Image src={src} alt={alt} width={width} height={height} className="w-full h-auto select-none" sizes="(min-width: 1024px) 672px, 100vw" loading="lazy" draggable={false} onContextMenu={(e) => e.preventDefault()} />
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
         <p className="text-sm font-medium text-white/90">{title}</p>
         <p className="text-xs text-white/70">{caption}</p>
@@ -32,7 +39,7 @@ function FlowStep({ title, caption, src, alt, onClick }: { title: string; captio
   );
 }
 
-function ImageLightbox({ image, onClose }: { image: { src: string; alt: string } | null; onClose: () => void }) {
+function ImageLightbox({ image, onClose }: { image: LightboxImage | null; onClose: () => void }) {
   if (!image) return null;
   return (
     <div
@@ -53,11 +60,14 @@ function ImageLightbox({ image, onClose }: { image: { src: string; alt: string }
         className="flex flex-col items-center max-w-[92vw] max-h-[92vh] bg-neutral-50 rounded-2xl shadow-2xl p-4 cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
+        <Image
           src={image.src}
           alt={image.alt}
-          className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
-          draggable="false"
+          width={image.width ?? 1600}
+          height={image.height ?? 1150}
+          className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-lg select-none"
+          sizes="92vw"
+          draggable={false}
           onContextMenu={(e) => e.preventDefault()}
         />
         <p className="mt-3 text-center text-sm font-medium text-neutral-700">{image.alt}</p>
@@ -174,7 +184,7 @@ function CTASection() {
 export function CribstockCaseStudy() {
   const [activeHeading, setActiveHeading] = useState('');
   const [dashboardIndex, setDashboardIndex] = useState(0);
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
   const dashboardSlides = [
     {
       platform: 'Web',
@@ -390,35 +400,45 @@ export function CribstockCaseStudy() {
                 caption="Top stocks, ongoing presales, or upcoming deals — all from one Invest view."
                 src="/projects/cribstock-purchase-flow/step-01-browse.png"
                 alt="Invest tab showing top stock listings"
-                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-01-browse.png', alt: 'Invest tab showing top stock listings' })}
+                width={12420}
+                height={8928}
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-01-browse.png', alt: 'Invest tab showing top stock listings', width: 12420, height: 8928 })}
               />
               <FlowStep
                 title="Filter to ongoing presales"
                 caption="Days-left counters and live progress bars surface urgency without saying a word."
                 src="/projects/cribstock-purchase-flow/step-02-filter-presale.png"
                 alt="Invest tab filtered to ongoing presales"
-                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-02-filter-presale.png', alt: 'Invest tab filtered to ongoing presales' })}
+                width={12420}
+                height={8928}
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-02-filter-presale.png', alt: 'Invest tab filtered to ongoing presales', width: 12420, height: 8928 })}
               />
               <FlowStep
                 title="Property detail"
                 caption="Deal type, estimated returns, and liquidation timeline — the numbers a buyer actually needs."
                 src="/projects/cribstock-purchase-flow/step-03-property-detail.png"
                 alt="Covet Estate property detail page"
-                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-03-property-detail.png', alt: 'Covet Estate property detail page' })}
+                width={12420}
+                height={8928}
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-03-property-detail.png', alt: 'Covet Estate property detail page', width: 12420, height: 8928 })}
               />
               <FlowStep
                 title="Buy shares"
                 caption="Unit count, payout estimate, and exit timeline in one focused modal before committing."
                 src="/projects/cribstock-purchase-flow/step-04-buy-modal.png"
                 alt="Buy Covet Estate modal"
-                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-04-buy-modal.png', alt: 'Buy Covet Estate modal' })}
+                width={12420}
+                height={8928}
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-04-buy-modal.png', alt: 'Buy Covet Estate modal', width: 12420, height: 8928 })}
               />
               <FlowStep
                 title="Purchase confirmed"
                 caption="Instant confirmation with a direct link to the new asset in your portfolio."
                 src="/projects/cribstock-purchase-flow/step-05-purchase-confirmed.png"
                 alt="Shares purchased confirmation"
-                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-05-purchase-confirmed.png', alt: 'Shares purchased confirmation' })}
+                width={12420}
+                height={8928}
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-05-purchase-confirmed.png', alt: 'Shares purchased confirmation', width: 12420, height: 8928 })}
               />
 
               <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -444,9 +464,9 @@ export function CribstockCaseStudy() {
 
               <div
                 className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary cursor-zoom-in"
-                onClick={() => setLightbox({ src: '/projects/Presale tracker.png', alt: 'Presale tracker' })}
+                onClick={() => setLightbox({ src: '/projects/Presale tracker.png', alt: 'Presale tracker', width: 6000, height: 3148 })}
               >
-                <img src="/projects/Presale tracker.png" alt="Presale tracker" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <Image src="/projects/Presale tracker.png" alt="Presale tracker" width={6000} height={3148} className="w-full h-auto select-none" sizes="(min-width: 1024px) 672px, 100vw" loading="lazy" draggable={false} onContextMenu={(e) => e.preventDefault()} />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-medium text-white/90">Presale Tracker</p>
                   <p className="text-xs text-white/70">Live counter, progress bar, and remaining shares</p>
@@ -469,9 +489,9 @@ export function CribstockCaseStudy() {
 
               <div
                 className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary cursor-zoom-in"
-                onClick={() => setLightbox({ src: '/projects/Upcoming presale.png', alt: 'Upcoming presales page' })}
+                onClick={() => setLightbox({ src: '/projects/Upcoming presale.png', alt: 'Upcoming presales page', width: 9284, height: 6871 })}
               >
-                <img src="/projects/Upcoming presale.png" alt="Upcoming presales page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                <Image src="/projects/Upcoming presale.png" alt="Upcoming presales page" width={9284} height={6871} className="w-full h-auto select-none" sizes="(min-width: 1024px) 672px, 100vw" loading="lazy" draggable={false} onContextMenu={(e) => e.preventDefault()} />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-medium text-white/90">Upcoming Presales</p>
                   <p className="text-xs text-white/70">Deal cards, valuations, and launch dates at a glance</p>
@@ -495,9 +515,9 @@ export function CribstockCaseStudy() {
               <div className="my-6 space-y-6">
                 <div
                   className="relative rounded-lg overflow-hidden border border-border bg-secondary cursor-zoom-in"
-                  onClick={() => setLightbox({ src: '/projects/Co-ownership.png', alt: 'Co-ownership page' })}
+                  onClick={() => setLightbox({ src: '/projects/Co-ownership.png', alt: 'Co-ownership page', width: 6000, height: 4313 })}
                 >
-                  <img src="/projects/Co-ownership.png" alt="Co-ownership page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                  <Image src="/projects/Co-ownership.png" alt="Co-ownership page" width={6000} height={4313} className="w-full h-auto select-none" sizes="(min-width: 1024px) 672px, 100vw" loading="lazy" draggable={false} onContextMenu={(e) => e.preventDefault()} />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex items-end justify-between">
                     <div>
                       <p className="text-sm font-medium text-white/90">Co-ownership Page</p>
@@ -510,9 +530,9 @@ export function CribstockCaseStudy() {
                 </div>
                 <div
                   className="relative rounded-lg overflow-hidden border border-border bg-secondary cursor-zoom-in"
-                  onClick={() => setLightbox({ src: '/projects/Rental deal.png', alt: 'Rental detail page' })}
+                  onClick={() => setLightbox({ src: '/projects/Rental deal.png', alt: 'Rental detail page', width: 6000, height: 4313 })}
                 >
-                  <img src="/projects/Rental deal.png" alt="Rental detail page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+                  <Image src="/projects/Rental deal.png" alt="Rental detail page" width={6000} height={4313} className="w-full h-auto select-none" sizes="(min-width: 1024px) 672px, 100vw" loading="lazy" draggable={false} onContextMenu={(e) => e.preventDefault()} />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex items-end justify-between">
                     <div>
                       <p className="text-sm font-medium text-white/90">Rental Detail Page</p>
