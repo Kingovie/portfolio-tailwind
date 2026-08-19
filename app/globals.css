@@ -195,3 +195,213 @@ html {
   50% { background-color: hsl(var(--muted-foreground) / 0.5); }
   75% { background-color: hsl(var(--muted-foreground) / 0.3); }
 }
+/* ==== Marquee (BringGoods case study filmstrip) — ported from portfolio-redesign ==== */
+/* Wide breakout for case-study marquees.
+   The case-study shell is `max-w-6xl mx-auto px-6` with a `w-64` sidebar and
+   `gap-12`. The marquee escapes the narrow `max-w-2xl` prose column and spans
+   the full shell content width — starting flush with the left edge of the
+   sidebar nav, not the viewport edge. Computed rather than measured, so it is
+   correct on first paint even when the page renders in a background tab. */
+.marquee-bleed {
+  position: relative;
+  width: calc(min(100vw, 72rem) - 3rem);
+}
+@media (min-width: 1024px) {
+  /* pull back across the sidebar (16rem) + gap (3rem) to sit flush with nav */
+  .marquee-bleed {
+    margin-left: -19rem;
+  }
+}
+
+/* Marquee: auto-scrolling screen filmstrip used in case studies.
+   scrollLeft is driven by JS (see Marquee.tsx) rather than a CSS transform
+   animation, so native drag/touch/wheel scrolling shares the same mechanism
+   as the ambient auto-scroll instead of fighting it. */
+.marquee-wrap {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-top: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.marquee-wrap::-webkit-scrollbar {
+  display: none;
+}
+.marquee-wrap-dragging {
+  cursor: grabbing;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  touch-action: pan-y;
+}
+.marquee-wrap-dragging .marquee-track {
+  user-select: none;
+}
+/* Each screen sits in its own cell, separated by a full-height hairline
+   divider (not a gap), with the caption pinned to the bottom of the cell. */
+.marquee-item {
+  display: flex;
+  flex-shrink: 0;
+  width: 300px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  border-right: 1px solid hsl(var(--border));
+  padding: 1.75rem 2.5rem 1.75rem;
+  text-align: center;
+  cursor: zoom-in;
+}
+.marquee-caption {
+  margin-top: 2rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Mockups ship with their own device frame baked in, so the cell just holds
+   the image at a consistent aspect box — no synthetic bezel. */
+.marquee-shot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.48;
+  transition: transform 200ms ease;
+}
+.marquee-item:hover .marquee-shot {
+  transform: translateY(-6px);
+}
+.marquee-item:active .marquee-shot {
+  transform: scale(0.95);
+  transition-duration: 90ms;
+}
+
+/* Lightbox: the cached strip-thumbnail shows instantly at its normal size
+   (no blur/scale — these mockups have an opaque device frame baked in, and
+   blowing up + blurring a hard-edged frame produces an ugly dark halo
+   bleeding past its edges), while the sharp full-resolution image cross-fades
+   in on top once it finishes loading — so opening a mockup never shows a
+   blank gap. */
+.marquee-shot-placeholder {
+  opacity: 1;
+}
+.marquee-shot-full {
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+.marquee-shot-full.is-loaded {
+  opacity: 1;
+}
+
+/* Screens delivered as a real screen-recording (already framed, already
+   looping) instead of a still image — just fills the same box the static
+   Shot would. */
+.marquee-shot-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* The dim scrim covers the full viewport (so clicking anywhere outside the
+   panel closes it), but the actual white backdrop is a smaller, centered,
+   rounded panel — not a full-screen wash of white. */
+.marquee-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: hsl(0 0% 0% / 0.55);
+  cursor: zoom-out;
+  animation: constellation-fade-in 0.2s ease-out forwards;
+}
+.marquee-lightbox-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(94vw, 760px);
+  height: min(90vh, 820px);
+  padding: 2rem;
+  border-radius: 1.25rem;
+  background: hsl(0 0% 98%);
+  box-shadow: 0 24px 60px hsl(0 0% 0% / 0.35);
+  cursor: default;
+}
+.marquee-lightbox-panel-video {
+  width: min(94vw, 500px);
+  height: min(94vh, 920px);
+}
+/* Pop-in: overshoots slightly past full size before settling, so the mockup
+   feels like it springs up out of the strip rather than just fading in. */
+.marquee-lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: center;
+  animation: marquee-pop-in 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  cursor: default;
+}
+@keyframes marquee-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.72) translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+/* Height-driven so the mockup reads close to full-size, like viewing the
+   real device, rather than a small thumbnail preview. */
+.marquee-lightbox-shot {
+  position: relative;
+  height: min(58vh, 540px);
+  width: calc(min(58vh, 540px) * 0.48);
+  max-width: 100%;
+}
+/* Video screens get noticeably more room than a static screenshot — motion
+   reads better bigger, and there's no image-optimizer resolution ceiling
+   to worry about. */
+.marquee-lightbox-shot-video {
+  height: min(84vh, 780px);
+  width: calc(min(84vh, 780px) * 0.48);
+}
+
+.marquee-lightbox-close {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  /* The panel wrapper's pop-in animation (transform/opacity) implicitly
+     promotes it to its own stacking context in most browsers — without an
+     explicit z-index here, DOM order decides and the panel (which comes
+     after this button) can paint over it. Most visible on mobile, where the
+     panel fills nearly the whole screen and its corner sits under the button. */
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  color: hsl(240 8% 12%);
+  background: hsl(0 0% 100%);
+  border: 1px solid hsl(0 0% 88%);
+  box-shadow: 0 2px 10px hsl(0 0% 0% / 0.12);
+  cursor: pointer;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+.marquee-lightbox-close:hover {
+  border-color: hsl(258 88% 66% / 0.6);
+  transform: scale(1.05);
+}

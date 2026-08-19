@@ -4,7 +4,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, Envelope } from '@phosphor-icons/react';
+import { ArrowLeft, Calendar, Envelope, X } from '@phosphor-icons/react';
+import { Marquee } from '../../components/Marquee';
+import { buyerScreens, sellerScreens, riderScreens } from '../../data/bringgoods-screens';
 
 function FeatureCard({ title, children, ai }: { title: string; children: React.ReactNode; ai?: boolean }) {
   return (
@@ -19,34 +21,45 @@ function FeatureCard({ title, children, ai }: { title: string; children: React.R
   );
 }
 
-function FlowDiagram({ title, steps, color }: { title: string; steps: string[]; color?: string }) {
-  const colors: Record<string, string> = {
-    'Buyer Flow': 'bg-emerald-500',
-    'Seller Flow': 'bg-blue-500',
-    'Rider Flow': 'bg-purple-500',
-  };
-  const bgColor = color || colors[title] || 'bg-primary';
-
-  return (
-    <div className="my-6 p-4 bg-secondary/50 rounded-xl border border-border">
-      <h4 className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">{title}</h4>
-      <div className="flex flex-wrap items-center gap-2">
-        {steps.map((step, i) => (
-          <React.Fragment key={i}>
-            <span className={`${bgColor} text-white px-3 py-1.5 rounded-full text-xs font-medium`}>{step}</span>
-            {i < steps.length - 1 && <span className="text-muted-foreground text-sm">→</span>}
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function BlockQuote({ children, author }: { children: React.ReactNode; author?: string }) {
   return (
     <div className="my-6 p-5 bg-secondary/50 border-l-4 border-primary rounded-r-lg">
       <p className="text-foreground italic text-base leading-relaxed">"{children}"</p>
       {author && <p className="text-xs text-muted-foreground mt-2 font-normal not-italic">— {author}</p>}
+    </div>
+  );
+}
+
+function ImageLightbox({ image, onClose }: { image: { src: string; alt: string } | null; onClose: () => void }) {
+  if (!image) return null;
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-6 cursor-zoom-out"
+      role="dialog"
+      aria-modal="true"
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        aria-label="Close"
+        onClick={onClose}
+        className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white text-neutral-900 flex items-center justify-center shadow-lg"
+      >
+        <X size={18} weight="bold" />
+      </button>
+      <div
+        className="flex flex-col items-center max-w-[92vw] max-h-[92vh] bg-neutral-50 rounded-2xl shadow-2xl p-4 cursor-default"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={image.src}
+          alt={image.alt}
+          className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
+          draggable="false"
+          onContextMenu={(e) => e.preventDefault()}
+        />
+        <p className="mt-3 text-center text-sm font-medium text-neutral-700">{image.alt}</p>
+      </div>
     </div>
   );
 }
@@ -126,6 +139,30 @@ function CTASection() {
 
 export function BringGoodsCaseStudy() {
   const [activeHeading, setActiveHeading] = useState('');
+  const [navHidden, setNavHidden] = useState(false);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
+  // Fade the sidebar out while a full-width screen marquee is on screen, so the
+  // mockups get the whole width to themselves, then bring it back afterwards.
+  useEffect(() => {
+    const targets = document.querySelectorAll('[data-nav-fade]');
+    if (!targets.length) return;
+
+    const visible = new Set<Element>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        }
+        setNavHidden(visible.size > 0);
+      },
+      { rootMargin: '-30% 0px -30% 0px' }
+    );
+
+    targets.forEach((t) => observer.observe(t));
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -158,10 +195,14 @@ export function BringGoodsCaseStudy() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen [overflow-x:clip]">
       <div className="max-w-6xl mx-auto px-6 py-12 flex gap-12">
         <aside className="hidden lg:block w-64 shrink-0">
-          <nav className="sticky top-12">
+          <nav
+            className={`sticky top-12 transition-opacity duration-500 ${
+              navHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
+          >
             <Link
               href="/"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
@@ -397,15 +438,7 @@ export function BringGoodsCaseStudy() {
                   Processing to Packing to Dispatch. Visible at every stage.
                 </FeatureCard>
               </div>
-              <FlowDiagram title="Buyer Flow" steps={['Onboarding', 'Select Items', 'Set Price', 'Seller Responds', 'Accept', 'Pay & Track']} />
-
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
-                <img src="/projects/Buyers Flow - Onboarding.png" alt="Buyer App - Onboarding and Shopping Flow" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                  <p className="text-sm font-medium text-white/90">Buyer App</p>
-                  <p className="text-xs text-white/70">Key Onboarding & Shopping Moments</p>
-                </div>
-              </div>
+              <Marquee items={buyerScreens} label="Buyer App — Onboarding & Shopping Moments" speed={48} />
 
               <h3 className="text-lg font-semibold mt-8 mb-4">Seller Experience</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -425,15 +458,7 @@ export function BringGoodsCaseStudy() {
                   Restock recommendations, expansion ideas, and performance trends.
                 </FeatureCard>
               </div>
-              <FlowDiagram title="Seller Flow" steps={['Onboarding', 'Verify Store', 'AI Assistant', 'Add Inventory', 'Manage & Optimize']} />
-
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
-                <img src="/projects/Sellers Flow - Onboarding.png" alt="Seller App - Onboarding and Store Management" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                  <p className="text-sm font-medium text-white/90">Seller App</p>
-                  <p className="text-xs text-white/70">Key Onboarding & Store Management Moments</p>
-                </div>
-              </div>
+              <Marquee items={sellerScreens} label="Seller App — Onboarding & Store Management Moments" speed={54} reverse />
 
               <h3 className="text-lg font-semibold mt-8 mb-4">Rider Experience</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
@@ -450,15 +475,7 @@ export function BringGoodsCaseStudy() {
                   Confirm arrival, scan pickup codes, verify items with sellers.
                 </FeatureCard>
               </div>
-              <FlowDiagram title="Rider Flow" steps={['Onboarding', 'Accept Orders', 'Monitor', 'Pickup Alert', 'Verify', 'Next Stop']} />
-
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
-                <img src="/projects/Rider Flow - Onboarding.png" alt="Rider App - Onboarding and Delivery Flow" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                  <p className="text-sm font-medium text-white/90">Rider App</p>
-                  <p className="text-xs text-white/70">Key Onboarding & Delivery Moments</p>
-                </div>
-              </div>
+              <Marquee items={riderScreens} label="Rider App — Onboarding & Delivery Moments" speed={48} />
             </section>
 
             {/* Admin Console */}
@@ -487,7 +504,10 @@ export function BringGoodsCaseStudy() {
                 The admin console uses role-based permissions to protect sensitive data while enabling customer support teams to resolve disputes quickly. By centralizing operations, it allows BringGoods to scale efficiently while maintaining the quality and speed that defines our &quot;before kettle boils&quot; promise.
               </p>
 
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+              <div
+                className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary cursor-zoom-in"
+                onClick={() => setLightbox({ src: '/projects/Admin console.png', alt: 'BringGoods Admin Console' })}
+              >
                 <img src="/projects/Admin console.png" alt="BringGoods Admin Console" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-medium text-white/90">Admin Console</p>
@@ -532,7 +552,10 @@ export function BringGoodsCaseStudy() {
                 The BringGoods Academy taught me everything I needed to know about running an online business. After completing the program, setting up my store was so much easier — I already understood pricing, customer service, and how to use social media to grow my sales.
               </BlockQuote>
 
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+              <div
+                className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary cursor-zoom-in"
+                onClick={() => setLightbox({ src: '/projects/Bringgood Academy.png', alt: 'BringGoods Academy' })}
+              >
                 <img src="/projects/Bringgood Academy.png" alt="BringGoods Academy" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-medium text-white/90">BringGoods Academy</p>
@@ -652,6 +675,7 @@ export function BringGoodsCaseStudy() {
           </div>
         </main>
       </div>
+      <ImageLightbox image={lightbox} onClose={() => setLightbox(null)} />
     </div>
   );
 }

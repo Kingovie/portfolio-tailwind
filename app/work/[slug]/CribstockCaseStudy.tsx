@@ -4,7 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, Calendar, Envelope, CaretLeft, CaretRight } from '@phosphor-icons/react';
+import { ArrowLeft, ArrowUpRight, Calendar, Envelope, X } from '@phosphor-icons/react';
+import { BeforeAfterSlider } from '../../components/BeforeAfterSlider';
 
 function FeatureCard({ title, children, tag }: { title: string; children: React.ReactNode; tag?: string }) {
   return (
@@ -15,6 +16,52 @@ function FeatureCard({ title, children, tag }: { title: string; children: React.
         {tag && <span className="text-[10px] font-semibold uppercase tracking-wider text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded">{tag}</span>}
       </h4>
       <p className="text-sm text-muted-foreground leading-relaxed">{children}</p>
+    </div>
+  );
+}
+
+function FlowStep({ title, caption, src, alt, onClick }: { title: string; caption: string; src: string; alt: string; onClick: () => void }) {
+  return (
+    <div className="relative rounded-lg overflow-hidden border border-border my-6 bg-secondary cursor-zoom-in" onClick={onClick}>
+      <img src={src} alt={alt} className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+        <p className="text-sm font-medium text-white/90">{title}</p>
+        <p className="text-xs text-white/70">{caption}</p>
+      </div>
+    </div>
+  );
+}
+
+function ImageLightbox({ image, onClose }: { image: { src: string; alt: string } | null; onClose: () => void }) {
+  if (!image) return null;
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-6 cursor-zoom-out"
+      role="dialog"
+      aria-modal="true"
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        aria-label="Close"
+        onClick={onClose}
+        className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white text-neutral-900 flex items-center justify-center shadow-lg"
+      >
+        <X size={18} weight="bold" />
+      </button>
+      <div
+        className="flex flex-col items-center max-w-[92vw] max-h-[92vh] bg-neutral-50 rounded-2xl shadow-2xl p-4 cursor-default"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={image.src}
+          alt={image.alt}
+          className="max-w-full max-h-[80vh] object-contain rounded-lg select-none"
+          draggable="false"
+          onContextMenu={(e) => e.preventDefault()}
+        />
+        <p className="mt-3 text-center text-sm font-medium text-neutral-700">{image.alt}</p>
+      </div>
     </div>
   );
 }
@@ -126,10 +173,27 @@ function CTASection() {
 
 export function CribstockCaseStudy() {
   const [activeHeading, setActiveHeading] = useState('');
-  const [slideIndex, setSlideIndex] = useState(0);
-  const slides = [
-    { src: '/projects/Before and after.png', alt: 'Dashboard before and after — desktop', title: 'Dashboard — before & after', caption: 'Desktop view showing the redesign in context' },
-    { src: '/projects/Mobile before and after.png', alt: 'Dashboard before and after — mobile', title: 'Dashboard — before & after', caption: 'Mobile view showing the redesign in context' },
+  const [dashboardIndex, setDashboardIndex] = useState(0);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const dashboardSlides = [
+    {
+      platform: 'Web',
+      title: 'Investor Dashboard — Desktop',
+      beforeSrc: '/projects/cribstock-dashboard-before.png',
+      afterSrc: '/projects/cribstock-dashboard-after.png',
+      beforeAlt: 'Investor dashboard before redesign — desktop',
+      afterAlt: 'Investor dashboard after redesign — desktop',
+      aspectRatio: 12420 / 8928,
+    },
+    {
+      platform: 'Mobile',
+      title: 'Investor Dashboard — Mobile',
+      beforeSrc: '/projects/cribstock-mobile-before.png',
+      afterSrc: '/projects/cribstock-mobile-after.png',
+      beforeAlt: 'Investor dashboard before redesign — mobile',
+      afterAlt: 'Investor dashboard after redesign — mobile',
+      aspectRatio: 12420 / 8928,
+    },
   ];
 
   useEffect(() => {
@@ -289,49 +353,73 @@ export function CribstockCaseStudy() {
                 The existing investor dashboard was there but it wasn't doing its job. Investors couldn't quickly understand their portfolio value, what income they had received, or what their wallet was doing. I redesigned it around what investors actually need to feel in control: value at a glance, income received, wallet activity. Clear hierarchy. No clutter.
               </p>
 
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
-                <div className="relative aspect-[6000/4898]">
-                  <AnimatePresence initial={false}>
-                    <motion.div
-                      key={slideIndex}
-                      initial={{ opacity: 0, x: 80 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -80 }}
-                      transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-                      className="absolute inset-0"
-                    >
-                      <img src={slides[slideIndex].src} alt={slides[slideIndex].alt} className="w-full h-full object-contain select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
-                    </motion.div>
-                  </AnimatePresence>
-                  <button onClick={() => setSlideIndex((slideIndex - 1 + slides.length) % slides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/15 hover:bg-black/30 text-white flex items-center justify-center transition-colors">
-                    <CaretLeft size={16} weight="bold" />
+              <div className="inline-flex items-center gap-1 rounded-full bg-secondary p-1 border border-border">
+                {dashboardSlides.map((slide, i) => (
+                  <button
+                    key={slide.platform}
+                    type="button"
+                    onClick={() => setDashboardIndex(i)}
+                    className={`text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full transition-colors ${
+                      dashboardIndex === i ? 'bg-foreground text-background' : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    {slide.platform}
                   </button>
-                  <button onClick={() => setSlideIndex((slideIndex + 1) % slides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/15 hover:bg-black/30 text-white flex items-center justify-center transition-colors">
-                    <CaretRight size={16} weight="bold" />
-                  </button>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 pointer-events-none">
-                  <p className="text-sm font-medium text-white/90">{slides[slideIndex].title}</p>
-                  <p className="text-xs text-white/70">{slides[slideIndex].caption}</p>
-                </div>
-                <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 text-white text-xs font-medium">
-                  <span className={slideIndex === 0 ? 'text-white' : 'text-white/40'}>&#x2022;</span>
-                  <span className={slideIndex === 1 ? 'text-white' : 'text-white/40'}>&#x2022;</span>
-                </div>
+                ))}
               </div>
+
+              <BeforeAfterSlider
+                key={dashboardIndex}
+                title={dashboardSlides[dashboardIndex].title}
+                caption="Drag to compare, or tap before / after"
+                beforeSrc={dashboardSlides[dashboardIndex].beforeSrc}
+                afterSrc={dashboardSlides[dashboardIndex].afterSrc}
+                beforeAlt={dashboardSlides[dashboardIndex].beforeAlt}
+                afterAlt={dashboardSlides[dashboardIndex].afterAlt}
+                aspectRatio={dashboardSlides[dashboardIndex].aspectRatio}
+                onImageClick={(src, alt) => setLightbox({ src, alt })}
+              />
 
               <h3 className="text-lg font-semibold mt-8 mb-3">02 — The property purchase flow</h3>
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Buying a property share had too many steps, too much jargon, and not enough reassurance along the way. I stripped it back. I made the pricing concrete, the returns tangible, and the steps feel like something a person designed rather than a compliance checklist.
               </p>
 
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
-                <img src="/projects/Property purchase flow.png" alt="Property purchase flow screens" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                  <p className="text-sm font-medium text-white/90">Property Purchase Flow</p>
-                  <p className="text-xs text-white/70">Key screens from the redesigned purchase journey</p>
-                </div>
-              </div>
+              <FlowStep
+                title="Browse properties"
+                caption="Top stocks, ongoing presales, or upcoming deals — all from one Invest view."
+                src="/projects/cribstock-purchase-flow/step-01-browse.png"
+                alt="Invest tab showing top stock listings"
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-01-browse.png', alt: 'Invest tab showing top stock listings' })}
+              />
+              <FlowStep
+                title="Filter to ongoing presales"
+                caption="Days-left counters and live progress bars surface urgency without saying a word."
+                src="/projects/cribstock-purchase-flow/step-02-filter-presale.png"
+                alt="Invest tab filtered to ongoing presales"
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-02-filter-presale.png', alt: 'Invest tab filtered to ongoing presales' })}
+              />
+              <FlowStep
+                title="Property detail"
+                caption="Deal type, estimated returns, and liquidation timeline — the numbers a buyer actually needs."
+                src="/projects/cribstock-purchase-flow/step-03-property-detail.png"
+                alt="Covet Estate property detail page"
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-03-property-detail.png', alt: 'Covet Estate property detail page' })}
+              />
+              <FlowStep
+                title="Buy shares"
+                caption="Unit count, payout estimate, and exit timeline in one focused modal before committing."
+                src="/projects/cribstock-purchase-flow/step-04-buy-modal.png"
+                alt="Buy Covet Estate modal"
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-04-buy-modal.png', alt: 'Buy Covet Estate modal' })}
+              />
+              <FlowStep
+                title="Purchase confirmed"
+                caption="Instant confirmation with a direct link to the new asset in your portfolio."
+                src="/projects/cribstock-purchase-flow/step-05-purchase-confirmed.png"
+                alt="Shares purchased confirmation"
+                onClick={() => setLightbox({ src: '/projects/cribstock-purchase-flow/step-05-purchase-confirmed.png', alt: 'Shares purchased confirmation' })}
+              />
 
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Drop-offs fell by 30% after the redesign shipped.
@@ -354,7 +442,10 @@ export function CribstockCaseStudy() {
                 For the first time, we were able to sell out our new property stock quicker and faster. The revamp brought a kind of urgency to investors — they needed to hurry so they didn't miss out.
               </PMQuote>
 
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+              <div
+                className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary cursor-zoom-in"
+                onClick={() => setLightbox({ src: '/projects/Presale tracker.png', alt: 'Presale tracker' })}
+              >
                 <img src="/projects/Presale tracker.png" alt="Presale tracker" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-medium text-white/90">Presale Tracker</p>
@@ -376,7 +467,10 @@ export function CribstockCaseStudy() {
                 If investors didn't know what was coming, they had no reason to stay ready. I designed a dedicated upcoming deals page showing future presales before they open, with the property details, deal valuation, and launch date visible. The goal was simple: let investors make up their mind before the clock starts. So when a presale drops, they're not deciding. They're acting.
               </p>
 
-              <div className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary">
+              <div
+                className="relative rounded-lg overflow-hidden border border-border my-8 bg-secondary cursor-zoom-in"
+                onClick={() => setLightbox({ src: '/projects/Upcoming presale.png', alt: 'Upcoming presales page' })}
+              >
                 <img src="/projects/Upcoming presale.png" alt="Upcoming presales page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
                   <p className="text-sm font-medium text-white/90">Upcoming Presales</p>
@@ -399,26 +493,32 @@ export function CribstockCaseStudy() {
               </p>
 
               <div className="my-6 space-y-6">
-                <div className="relative rounded-lg overflow-hidden border border-border bg-secondary">
+                <div
+                  className="relative rounded-lg overflow-hidden border border-border bg-secondary cursor-zoom-in"
+                  onClick={() => setLightbox({ src: '/projects/Co-ownership.png', alt: 'Co-ownership page' })}
+                >
                   <img src="/projects/Co-ownership.png" alt="Co-ownership page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex items-end justify-between">
                     <div>
                       <p className="text-sm font-medium text-white/90">Co-ownership Page</p>
                       <p className="text-xs text-white/70">Shareholding, valuation, exit timeline</p>
                     </div>
-                    <a href="https://cribstock.com/" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold uppercase tracking-wider text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full transition-colors shrink-0 flex items-center gap-1.5">
+                    <a href="https://cribstock.com/" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-xs font-semibold uppercase tracking-wider text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full transition-colors shrink-0 flex items-center gap-1.5">
                       Visit live product <ArrowUpRight size={14} weight="bold" />
                     </a>
                   </div>
                 </div>
-                <div className="relative rounded-lg overflow-hidden border border-border bg-secondary">
+                <div
+                  className="relative rounded-lg overflow-hidden border border-border bg-secondary cursor-zoom-in"
+                  onClick={() => setLightbox({ src: '/projects/Rental deal.png', alt: 'Rental detail page' })}
+                >
                   <img src="/projects/Rental deal.png" alt="Rental detail page" className="w-full h-auto select-none" loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex items-end justify-between">
                     <div>
                       <p className="text-sm font-medium text-white/90">Rental Detail Page</p>
                       <p className="text-xs text-white/70">Income rate, payout cadence, occupancy</p>
                     </div>
-                    <a href="https://cribstock.com/" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold uppercase tracking-wider text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full transition-colors shrink-0 flex items-center gap-1.5">
+                    <a href="https://cribstock.com/" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-xs font-semibold uppercase tracking-wider text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full transition-colors shrink-0 flex items-center gap-1.5">
                       Visit live product <ArrowUpRight size={14} weight="bold" />
                     </a>
                   </div>
@@ -491,6 +591,7 @@ export function CribstockCaseStudy() {
           </div>
         </main>
       </div>
+      <ImageLightbox image={lightbox} onClose={() => setLightbox(null)} />
     </div>
   );
 }
