@@ -4,6 +4,7 @@ const BringGoodsCaseStudy = dynamic(() => import('./BringGoodsCaseStudy').then(m
 const CribstockCaseStudy = dynamic(() => import('./CribstockCaseStudy').then(m => m.CribstockCaseStudy));
 const EspeeCaseStudy = dynamic(() => import('./EspeeCaseStudy').then(m => m.EspeeCaseStudy));
 const YobuluCaseStudy = dynamic(() => import('./YobuluCaseStudy').then(m => m.YobuluCaseStudy));
+const NotchHRCaseStudy = dynamic(() => import('./NotchHRCaseStudy').then(m => m.NotchHRCaseStudy));
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -22,6 +23,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   if (slug === 'yobulu') {
     return <YobuluCaseStudy />;
+  }
+
+  if (slug === 'notchhr') {
+    return <NotchHRCaseStudy />;
   }
 
   return (

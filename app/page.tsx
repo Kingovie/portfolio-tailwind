@@ -33,7 +33,8 @@ const portfolioData = {
     { name: "BringGoods", category: "Mobile App", description: "A hyperlocal e-commerce platform that delivers fresh food in under 30 minutes across Lagos, Nigeria with a unique price negotiation feature.", slug: "bringgoods", image: "/projects/Scene-1.png" },
     { name: "Cribstock", category: "Web App", description: "Real estate investment platform enabling everyday Nigerians to co-own properties and earn rental income from their phones.", slug: "cribstock", image: "/projects/cribstock-card.png" },
     { name: "Yobulu", category: "Mobile App", description: "A unified financial ecosystem that gives users access to CFD markets, cryptocurrencies, stocks, P2P trading, event-based investments, and everyday banking services through a seamless experience.", slug: "yobulu", image: "/projects/yobulu-card.jpg" },
-    { name: "Espee Marketplace", category: "Marketplace", description: "A digital commerce platform that allows buyers to discover products, sellers to grow their businesses, and both parties to transact using Espees (SPS).", slug: "espee-marketplace", image: "/projects/espee-market-card.png" }
+    { name: "Espee Marketplace", category: "Marketplace", description: "A digital commerce platform that allows buyers to discover products, sellers to grow their businesses, and both parties to transact using Espees (SPS).", slug: "espee-marketplace", image: "/projects/espee-market-card.png" },
+    { name: "NotchHR", category: "Web App", description: "A self-initiated redesign exploring how NotchHR could communicate its product more clearly and create a more modern SaaS experience.", slug: "notchhr", image: "/projects/notchhr-thumb.jpg", buttonLabel: "View redesign" }
   ],
   writing: [
     { title: "Putting Ideas into Words", author: "Paul Graham", url: "https://paulgraham.com/words.html", image: "/articles/paul-graham-words.png" },
@@ -329,7 +330,7 @@ export default function Portfolio() {
                           href={`/work/${project.slug}`}
                           className="shrink-0 inline-flex items-center px-2.5 py-1 bg-secondary text-muted-foreground rounded-full text-[11px] font-medium hover:text-foreground hover:bg-secondary/80 active:scale-95 transition-all"
                         >
-                          View case study
+                          {project.buttonLabel || 'View case study'}
                         </Link>
                       ) : (
                         <span className="shrink-0 inline-flex items-center px-2.5 py-1 bg-secondary text-muted-foreground/40 rounded-full text-[11px] font-medium">

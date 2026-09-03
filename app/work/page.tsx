@@ -48,6 +48,16 @@ const projects = [
     status: 'in development',
     linkable: false,
   },
+  {
+    slug: 'notchhr',
+    title: 'NotchHR: Reimagining the HR Experience for Modern Teams',
+    description: 'A self-initiated redesign exploring how NotchHR could communicate its product more clearly and create a more modern SaaS experience.',
+    date: '2026',
+    tags: ['case study', 'product design', 'ux audit'],
+    image: '/projects/notchhr-card.svg',
+    status: 'concept',
+    linkable: true,
+  },
 ];
 
 export default function WorkPage() {
@@ -106,9 +116,11 @@ export default function WorkPage() {
                       <span className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-medium shadow-sm ${
                         project.status === 'shipped'
                           ? 'bg-emerald-500/90 text-white'
+                          : project.status === 'concept'
+                          ? 'bg-secondary text-muted-foreground'
                           : 'bg-amber-500/90 text-white'
                       }`}>
-                        {project.status === 'shipped' ? 'Shipped' : 'In Development'}
+                        {project.status === 'shipped' ? 'Shipped' : project.status === 'concept' ? 'Concept' : 'In Development'}
                       </span>
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                         <span className="px-4 py-2 rounded-full text-sm font-medium bg-foreground text-background shadow-sm">
@@ -157,9 +169,11 @@ export default function WorkPage() {
                     <span className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-medium shadow-sm ${
                       project.status === 'shipped'
                         ? 'bg-emerald-500/90 text-white'
+                        : project.status === 'concept'
+                        ? 'bg-secondary text-muted-foreground'
                         : 'bg-amber-500/90 text-white'
                     }`}>
-                      {project.status === 'shipped' ? 'Shipped' : 'In Development'}
+                      {project.status === 'shipped' ? 'Shipped' : project.status === 'concept' ? 'Concept' : 'In Development'}
                     </span>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="px-4 py-2 rounded-full text-sm font-medium bg-foreground text-background shadow-sm">
